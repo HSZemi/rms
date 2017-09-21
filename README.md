@@ -12,4 +12,5 @@ it is probably located under `C:\Program Files (x86)\Steam\steamapps\common\Age2
 To play KOTH Regicide, select the King of the Hill gamemode and choose one of the maps provided - 
 they all have a KHR_ prefix.
 
-All maps from the KOTH_REGICIDE folder stem from HJ1 (https://github.com/HJ1/Age-of-Empires-II-RMS-Maps-Archive)
+All maps from the KOTH_REGICIDE folder stem from [HJ1](https://github.com/HJ1/Age-of-Empires-II-RMS-Maps-Archive) 
+and have been modified to enable KOTH Regicide.
