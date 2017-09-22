@@ -5,18 +5,28 @@
 /* Modified into a King of the Hill Regicide map by HSZemi */
 /* NEEDS USER PATCH 1.5 FOR THE REGICIDE FUNCTIONALITY */
 /* To play King of the Hill Regicide, use this map in King of the Hill game mode. */
-/* NEEDS USER PATCH 1.5 FOR THE REGICIDE FUNCTIONALITY */
-/* To play King of the Hill Regicide, use this map in King of the Hill game mode. */
 
 #const AMOUNT_FOOD 0
 #const AMOUNT_WOOD 1
 #const AMOUNT_STONE 2
 #const AMOUNT_GOLD 3
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+
 
 /* ************************************ */
 <PLAYER_SETUP>
   random_placement
   guard_state KING AMOUNT_WOOD 0 1
+  effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 300
+  effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 300
+  effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET -100
+  effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET -50
+
 
 <LAND_GENERATION>
 base_terrain WATER
