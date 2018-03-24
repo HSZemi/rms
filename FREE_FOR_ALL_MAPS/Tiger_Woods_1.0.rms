@@ -1,0 +1,127 @@
+/************* MANGROVE NOTHING AKA TIGER WOODS ******************/
+
+WORK IN PROGRESS
+
+/* ****************************************************** */
+
+#include_drs random_map.def 
+<PLAYER_SETUP>
+  terrain_state 0 0 0 1
+
+<LAND_GENERATION>
+
+base_terrain DLC_MANGROVESHALLOW
+
+/* AREA */ 
+
+create_player_lands
+{
+  terrain_type DLC_MANGROVESHALLOW
+  land_percent 6
+  base_size 10
+  border_fuzziness 15
+clumping_factor 15
+other_zone_avoidance_distance 3
+set_zone_by_team
+}
+
+if KING_OT_HILL
+create_land
+{
+terrain_type DLC_WATER4
+number_of_tiles 100
+land_position 50 50
+base_size 10
+}
+endif
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+/* PRIMARY FOREST */
+create_terrain DLC_MANGROVEFOREST
+{
+	base_terrain					DLC_MANGROVESHALLOW
+	land_percent					100
+	number_of_clumps				999
+	clumping_factor					111
+	set_avoid_player_start_areas                    10
+        set_scale_by_groups
+}
+
+/* PONDS */
+create_terrain BEACH
+
+{ base_terrain DLC_MANGROVEFOREST
+  land_percent 10  
+  number_of_clumps 50
+}
+
+create_terrain  WATER
+{
+base_terrain BEACH
+land_percent 6
+number_of_clumps 50
+other_zone_avoidance_distance 1
+base_size 1
+clumbing_factor 100
+}
+
+create_terrain SHALLOW   
+{
+base_terrain DLC_WATER4
+land_percent 100
+number_of_clumps 100
+
+
+<PLAYER_SETUP>
+  random_placement  
+
+
+create_player_lands 
+{
+  land_percent                     100
+  base_size                        0
+  other_zone_avoidance_distance    0
+}
+
+/* ****************************************************** */
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+
+/* PLAYER START OBJECTS */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     22
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       3
+ }
+
+/* TIGERS */
+create_object DLC_TIGER
+{
+	number_of_groups				50
+	number_of_objects				10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement	1
+	min_distance_to_players			14
+	max_distance_to_players			99
+}
+
+
+base_terrain DLC_MANGROVEFOREST
+
+
+/* ****************************************************** */

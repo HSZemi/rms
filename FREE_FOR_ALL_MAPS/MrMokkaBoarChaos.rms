@@ -1,0 +1,126 @@
+/* ************ Boar Nothing ************ */
+/* 22 FEB 18 */
+
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+
+random_placement
+
+/* ****************************************************** */
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands
+{ 
+	terrain_type GRASS
+	land_percent 25
+	base_size 9
+	border_fuzziness 15
+	clumping_factor 15
+	set_zone_randomly
+	other_zone_avoidance_distance 0
+	left_border 10
+	right_border 10
+	top_border 10
+	bottom_border 10
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+create_terrain GRASS1
+{
+	base_terrain GRASS
+	land_percent 3
+	number_of_clumps 40
+	set_scale_by_size
+	spacing_to_other_terrain_types 0
+	set_avoid_player_start_areas
+	clumping_factor 1
+}
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* CREATE STUFF FOR PLAYERS */
+create_object TOWN_CENTER
+{
+	number_of_objects 1
+	set_place_for_every_player
+	terrain_to_place_on GRASS
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+	number_of_objects 20
+	set_place_for_every_player
+	terrain_to_place_on GRASS
+	min_distance_to_players 4
+	max_distance_to_players 6
+}
+
+create_object HOUSE
+{
+	number_of_objects 4
+	set_place_for_every_player
+	terrain_to_place_on GRASS
+	min_distance_to_players 6
+	max_distance_to_players 8
+}
+
+
+/* SPECIAL STUFF FOR REGICIDE */
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players			6
+	max_distance_to_players			6
+}
+endif
+
+/* RING OF TREES */
+create_object OAKTREE
+{
+	number_of_objects				1000
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			10
+	max_distance_to_players			10
+	min_distance_group_placement	0
+}
+
+/* BOARS */
+create_object BOAR
+{
+	number_of_objects				2000
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			12
+}
+create_object IRON_BOAR
+{
+	number_of_objects				2000
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			16
+}
+
+
+
+
+
+/* ****************************************************** */
+<ELEVATION_GENERATION>
+
+
+/* ****************************************************** */
+/* <CLIFF_GENERATION> */
+
+
+

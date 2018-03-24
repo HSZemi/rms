@@ -1,0 +1,327 @@
+/************* CANNON BOAR******************/
+
+
+#include_drs random_map.def 54000
+
+#const ATTR_BLAST_LEVEL 44
+#const ATTR_BLAST_RADIUS 22
+#const ATTR_SEARCH_RADIUS 23
+
+
+<PLAYER_SETUP>
+
+  random_placement
+
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_BLAST_RADIUS 2
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_BLAST_LEVEL 1
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_MAX_RANGE 3
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_ATTACK 8
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_SEARCH_RADIUS 6
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_LINE_OF_SIGHT 8
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_PROJECTILE_ID 327
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_GARRISON_ARROWS 1
+	effect_amount SET_ATTRIBUTE IRON_BOAR ATTR_MAX_DUP_MISSILES 2
+	effect_percent SET_ATTRIBUTE IRON_BOAR ATTR_RELOAD_TIME 250
+
+
+
+/* ****************************************************** */
+
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands
+{
+	terrain_type					GRASS
+	land_percent					1
+	base_size			   		3
+	other_zone_avoidance_distance	                3
+	border_fuzziness				1
+	clumping_factor					1
+	set_zone_by_team
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+/* PRIMARY FOREST */
+create_terrain FOREST
+{
+	base_terrain					GRASS
+	spacing_to_other_terrain_types	1
+	land_percent					65
+	number_of_clumps				999
+	clumping_factor					1
+	set_avoid_player_start_areas
+        set_scale_by_groups
+}
+
+/* SECONDARY FOREST */
+create_terrain PINE_FOREST
+{
+	base_terrain					FOREST
+	spacing_to_other_terrain_types	1
+	land_percent					65
+	number_of_clumps				999
+	clumping_factor					1
+        set_avoid_player_start_areas
+	set_scale_by_groups
+}
+
+create_terrain PINE_FOREST
+{
+	base_terrain					FOREST
+	spacing_to_other_terrain_types	1
+	land_percent					65
+	number_of_clumps				999
+	clumping_factor					1
+        set_avoid_player_start_areas
+	set_scale_by_groups
+}
+
+
+
+<PLAYER_SETUP>
+  random_placement  
+
+
+create_player_lands 
+{
+if FROZEN_MAP
+  terrain_type				SNOW
+else            
+  terrain_type                     GRASS
+endif
+  land_percent                     100
+  base_size                        0
+  other_zone_avoidance_distance    0
+}
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* PLAYER START OBJECTS */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     5
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       3
+ }
+
+
+/* IRON_BOAR */
+create_object IRON_BOAR
+{
+	number_of_groups				99
+	number_of_objects				5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement	2
+	min_distance_to_players			25
+	max_distance_to_players			99
+}
+
+create_object IRON_BOAR
+{
+	number_of_groups				99
+	number_of_objects				5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement	2
+	min_distance_to_players			25
+	max_distance_to_players			99
+}
+
+create_object IRON_BOAR
+{
+	number_of_groups				99
+	number_of_objects				5
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement	2
+	min_distance_to_players			25
+	max_distance_to_players			99
+}
+
+/* BIG STONE */
+create_object STONE
+{
+	number_of_objects				8
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			10
+	min_distance_group_placement	7
+}
+
+/* BIG GOLD */
+create_object GOLD
+{
+	number_of_objects				8
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			8
+	min_distance_group_placement	7
+}
+
+create_object GOLD
+{
+	number_of_objects				8
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			8
+	min_distance_group_placement	7
+}
+
+/*RANDOM_SPAWNS*/
+
+#const FIRE_TOWER 190
+#const FLAMETHROWER 188
+#const PENGUIN 639
+#const SU_DINGFANG 1073
+#const ABRAHA_ELEPHANT 1071
+#const ALFRED_THE_ALPACA 934
+#const FURIOUS_THE_MONKEY_BOY 860
+
+
+start_random
+
+	percent_chance 9
+create_object FIRE_TOWER
+{
+  	set_place_for_every_player
+	number_of_objects 5
+  	min_distance_to_players 8
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object CASTLE
+{
+  	set_place_for_every_player
+	number_of_objects 2
+  	min_distance_to_players 8
+  	max_distance_to_players 10
+}	
+	percent_chance 9
+create_object TREBUCHET
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object GENGHIS_KHAN
+{
+  	set_place_for_every_player
+	number_of_objects 2
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object PENGUIN
+{
+  	set_place_for_every_player
+	number_of_objects 15
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object SU_DINGFANG
+{
+  	set_place_for_every_player
+	number_of_objects 5
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object ROBIN_HOOD
+{
+  	set_place_for_every_player
+	number_of_objects 5
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object ABRAHA_ELEPHANT
+{
+  	set_place_for_every_player
+	number_of_objects 3
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 10
+create_object ALFRED_THE_ALPACA
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+	percent_chance 9
+create_object FLAMETHROWER
+{
+  	set_place_for_every_player
+	number_of_objects 5
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+
+	percent_chance 9
+create_object FURIOUS_THE_MONKEY_BOY
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 7
+  	max_distance_to_players 10
+}
+
+end_random
+
+<ELEVATION_GENERATION>
+
+create_elevation        0
+{
+if FROZEN_MAP
+  base_terrain			SNOW
+else
+  base_terrain 			GRASS
+endif
+  number_of_clumps 		0
+  number_of_tiles 		0
+  set_scale_by_groups           
+}
+
+<ELEVATION_GENERATION>
+create_elevation        0
+{
+if FROZEN_MAP
+  base_terrain			GRASS_SNOW
+elseif TROPICAL_MAP 
+  base_terrain 			JUNGLE
+else
+  base_terrain			FOREST
+endif
+  number_of_clumps 		
+  number_of_tiles               0
+  set_scale_by_groups           
+}
+

@@ -1,0 +1,360 @@
+/* losely based on the standard Arena by ES
+modified and renamed by swissboyy */
+
+#include_drs random_map.def 54000
+
+#const ELEPHANT 936
+#const ZEBRA 1019
+#const GOATTEE 1060
+#const BAOBABTREE 1052
+#const ORANGESHRUB 1059
+
+#const MONUMENT 826
+#const SABOTEUR 706
+#const SHARKATZOR 1222
+#const TRADE_WORKSHOP 110
+#const OLD_MONK_W_RELIC 1025
+#const SHARK_ARROW 1223
+#const TRISTAN 1109
+#const BBT_TECH 64
+#const FREE_BBT_TECH 444
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+
+random_placement
+
+	effect_amount GAIA_ADD_ATTRIBUTE TREE_CLASS ATTR_STORAGE_VALUE 150
+
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_TRAIN_LOCATION 82
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_TRAIN_BUTTON 14
+	effect_amount MUL_ATTRIBUTE SABOTEUR ATTR_WOOD_COST -2
+	effect_amount MUL_ATTRIBUTE SABOTEUR ATTR_FOOD_COST -1
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_GOLD_COST 35
+	effect_amount ENABLE_OBJECT SABOTEUR ATTR_ENABLE 0
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_HITPOINTS 60
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_SHOWN_ATTACK 45
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_ATTACK 301
+	effect_amount ADD_ATTRIBUTE SABOTEUR ATTR_ATTACK 3066
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_BLAST_RADIUS 2
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_BLAST_LEVEL 1
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_ARMOR 516
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_ARMOR 2
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_SHOWN_PIERCE_ARMOR 4
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_MOVE_SPEED 1.05
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_CREATE_SDESC_ID 6660
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_NAME_ID 5588
+
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_TRAIN_LOCATION 826
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_TRAIN_BUTTON 1
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_SHOWN_ATTACK 14
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_ATTACK 526
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_ARMOR 258
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_SHOWN_MELEE_ARMOR 2
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_ARMOR 514
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_SHOWN_PIERCE_ARMOR 2
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_GOLD_COST 45
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_HITPOINTS 70
+	effect_percent SET_ATTRIBUTE TRISTAN ATTR_MOVE_SPEED 90
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_CREATION_TIME 50
+	effect_amount SET_ATTRIBUTE TRISTAN ATTR_NAME_ID 5779
+	effect_amount ENABLE_OBJECT TRISTAN ATTR_ENABLE 0
+
+	effect_amount SET_ATTRIBUTE KING ATTR_DEAD_ID 1222
+	effect_amount SET_ATTRIBUTE OLD_MONK_W_RELIC ATTR_HITPOINTS 0
+	effect_amount SET_ATTRIBUTE OLD_MONK_W_RELIC ATTR_DEAD_ID 922
+	effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_HITPOINTS 0
+	effect_amount SET_ATTRIBUTE SHARKATZOR ATTR_DEAD_ID 1025
+
+	effect_amount DISABLE_TECH BBT_TECH ATTR_DISABLE 64
+	effect_amount DISABLE_TECH FREE_BBT_TECH ATTR_DISABLE 444
+
+	effect_percent SET_ATTRIBUTE TRADE_CART ATTR_MOVE_SPEED 70
+	effect_percent SET_ATTRIBUTE TRADE_COG ATTR_MOVE_SPEED 93
+
+	effect_percent SET_ATTRIBUTE KING ATTR_MOVE_SPEED 110
+
+	guard_state MONUMENT AMOUNT_GOLD 250 2
+  ai_info_map_type ARENA 0 0 1
+
+/* ****************************************************** */
+<LAND_GENERATION>
+base_terrain PALM_DESERT
+
+/* Fill in center */
+
+create_land
+{            
+terrain_type                     DESERT
+land_percent                  70
+/* 50 */
+left_border                   10
+right_border                  10
+top_border                    10
+bottom_border                 10
+}
+
+create_player_lands 
+{            
+terrain_type                     DESERT
+land_percent                     13
+base_size						 18
+left_border                   12
+right_border                  12
+top_border                    12
+bottom_border                 12
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+/* PRIMARY PATCH */
+create_terrain DIRT2
+{
+  base_terrain                   DESERT
+  number_of_clumps               8
+  spacing_to_other_terrain_types 0
+  land_percent                   6
+  set_scale_by_size
+}
+
+
+/* SECONDARY PATCH */
+create_terrain LEAVES
+{
+  base_terrain                   DESERT
+  number_of_clumps               24
+  spacing_to_other_terrain_types 0
+  land_percent                   2
+  set_scale_by_size
+}
+
+
+/* TERTIARY PATCH */
+
+create_terrain DIRT3
+{
+  base_terrain                   DESERT
+  number_of_clumps               30
+  spacing_to_other_terrain_types 0
+  land_percent                   2
+  set_scale_by_size
+}
+
+/* PLAYER LAND PATCH 1 */
+create_terrain LEAVES
+{
+  base_terrain                   DIRT3
+  number_of_clumps               24
+  spacing_to_other_terrain_types 0
+  land_percent                   2
+  set_scale_by_size
+}
+
+
+/* PLAYER LAND PATCH 2 */
+create_terrain GRASS2
+{
+  base_terrain                   DIRT3
+  number_of_clumps               30
+  spacing_to_other_terrain_types 0
+  land_percent                   2
+  set_scale_by_size
+}
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* ******* LAND AND WATER RESOURCES ************ */
+
+/* PLAYER START OBJECTS */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     18
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object SCOUT
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       7
+ }
+
+/* BERRIES */
+create_object ORANGESHRUB
+{
+	number_of_objects				6
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			10
+	max_distance_to_players			12
+	min_distance_group_placement	6
+}
+
+/* "BOARS" */
+create_object ELEPHANT
+{
+	number_of_groups					2
+	number_of_objects				1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			16
+	max_distance_to_players			18
+}
+
+/* BIG STONE */
+create_object STONE
+{
+	number_of_objects				5
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			18
+	min_distance_group_placement	7
+}
+
+/* BIG GOLD */
+create_object GOLD
+{
+	number_of_objects				7
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			16
+	min_distance_group_placement	7
+}
+
+/* STONE */
+create_object STONE
+{
+	number_of_objects				4
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			18
+	max_distance_to_players			20
+	min_distance_group_placement	14
+}
+
+/* GOLD */
+create_object GOLD
+{
+	number_of_objects				7
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			18
+	max_distance_to_players			20
+	min_distance_group_placement	7
+}
+
+/* BAA BAA */
+create_object GOATTEE
+{
+	number_of_objects				4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			8
+}
+
+create_object GOATTEE
+{
+	number_of_groups				2
+	number_of_objects				2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			20
+}
+
+/* "DEER" */
+create_object ZEBRA
+{
+	number_of_objects				3
+	group_placement_radius			3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			18
+	min_distance_group_placement	9
+}
+
+/* STRAGGLER TREES */
+create_object BAOBABTREE
+{
+	number_of_objects				2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			4
+	max_distance_to_players			5
+	min_distance_group_placement	2
+}
+create_object BAOBABTREE
+{
+	number_of_objects				3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			6
+	max_distance_to_players			8
+	min_distance_group_placement	2
+}
+
+create_object RELIC
+{
+  number_of_objects            5
+  terrain_to_place_on	DESERT
+  min_distance_group_placement 5
+}
+
+create_object SKELETON
+{
+  number_of_objects           8
+  min_distance_group_placement 5
+  terrain_to_place_on	DIRT2
+}
+
+/* SPECIAL STUFF FOR REGICIDE */
+if REGICIDE
+create_object VILLAGER
+{
+  number_of_objects             7
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+endif
+
+/* END STANDARD RESOURCES */
+

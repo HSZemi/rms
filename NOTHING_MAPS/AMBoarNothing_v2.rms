@@ -1,0 +1,222 @@
+<PLAYER_SETUP>
+random_placement
+
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands
+{
+  terrain_type	                DIRT
+  land_percent                  1
+  left_border                   5
+  right_border                  5
+  top_border                    5
+  bottom_border                 5
+  base_size                     9 
+  other_zone_avoidance_distance 5
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DIRT3
+{
+	base_terrain GRASS
+	land_percent 20
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain DESERT
+{
+	base_terrain GRASS
+	land_percent 20
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain LEAVES
+{
+	base_terrain GRASS
+	land_percent 20
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain GRASS2
+{
+	base_terrain GRASS
+	land_percent 20
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain GRASS3
+{
+	base_terrain GRASS
+	land_percent 20
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+<CONNECTION_GENERATION>
+
+create_connect_all_players_land
+{
+default_terrain_replacement ROAD2
+terrain_size ROAD2 1 1
+}
+
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER 
+{
+  set_place_for_every_player
+  group_placement_radius        1
+  min_distance_to_players       0
+  max_distance_to_players       0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       5
+}
+
+create_object SCOUT
+{
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       9
+}
+create_object MARKET
+{
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       9
+}
+
+if REGICIDE
+create_object HOUSE
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       4
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+}
+
+endif
+
+create_object PINE_FOREST_TREE /* straggler trees */
+{
+  	number_of_objects             2
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players       4
+  	max_distance_to_players       5
+  	temp_min_distance_group_placement  2
+	resource_delta +400
+}
+create_object PINE_FOREST_TREE
+{
+  	number_of_objects             3
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players       6
+ 	max_distance_to_players       8
+  	temp_min_distance_group_placement  2
+	resource_delta +400
+}
+
+create_object BOAR
+{
+	number_of_objects 999
+	set_scaling_to_map_size
+	terrain_to_place_on DIRT3
+	set_gaia_object_only
+}
+
+create_object BOAR
+{
+number_of_objects          888
+  set_gaia_object_only
+  set_place_for_every_player
+  terrain_to_place_on 		DESERT
+}
+
+create_object BOAR
+{
+	number_of_objects 777
+	set_scaling_to_map_size
+	terrain_to_place_on GRASS2
+	set_gaia_object_only
+}
+
+create_object BOAR
+{
+	number_of_objects 666
+	set_scaling_to_map_size
+	terrain_to_place_on GRASS3
+	set_gaia_object_only
+}
+
+create_object BOAR
+{
+	number_of_objects 555
+	set_scaling_to_map_size
+	terrain_to_place_on LEAVES
+	set_gaia_object_only
+}
+create_object JAVELINA
+{
+	number_of_objects 444
+	set_scaling_to_map_size
+	terrain_to_place_on ROAD2
+	set_gaia_object_only
+	min_distance_to_players 8
+}
+
+
+create_object IRON_BOAR
+{
+	number_of_objects 1
+	number_of_groups 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 15
+	max_distance_to_players 20
+}
+create_object IRON_BOAR
+{
+	number_of_objects 1
+	number_of_groups 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 20
+	max_distance_to_players 30
+}
+create_object IRON_BOAR
+{
+	number_of_objects 1
+	number_of_groups 10
+	set_scaling_to_map_size
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 30
+	max_distance_to_players 40
+}

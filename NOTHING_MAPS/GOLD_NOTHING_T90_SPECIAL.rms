@@ -1,0 +1,161 @@
+
+/* ****************************************************** */
+/* ************** Gold_circle_nothing ******************* */
+/* ****************************************************** */
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+random_placement
+
+/* ****************************************************** */
+
+
+
+#const KING 434
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+#const AMOUNT_GOLD 3
+#const SET_ATTRIBUTE 0
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+
+<PLAYER_SETUP>
+  random_placement
+	guard_state KING AMOUNT_GOLD 0 1
+	effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET -100
+	effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET -50
+	effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 300
+	effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 300	
+
+<LAND_GENERATION>
+base_terrain DESERT
+
+create_land
+{
+	terrain_type			FOREST
+	top_border			12
+	left_border			12
+	bottom_border			12
+	right_border			12
+  	border_fuzziness                 100
+  	land_percent                     100
+}
+
+
+create_player_lands
+{
+	terrain_type			GRASS
+	set_zone_by_team
+	top_border			9
+	left_border			9
+	bottom_border			9
+	right_border			9
+  	border_fuzziness                 100
+  	land_percent                     0
+  	base_size			2
+}
+
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+create_terrain DIRT3
+{
+   base_terrain FOREST
+  land_percent                   100
+  spacing_to_other_terrain_types 7
+}
+	
+create_terrain DIRT2
+{
+   base_terrain DIRT3
+  land_percent                   100
+  spacing_to_other_terrain_types 5
+}
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+
+create_object GOLD
+{
+	number_of_objects 100000
+	terrain_to_place_on DESERT
+  	set_gaia_object_only
+	resource_delta -500
+}
+
+create_object GOLD
+{
+	number_of_objects 100000
+	terrain_to_place_on DIRT3
+  	set_gaia_object_only
+	resource_delta -500
+}
+
+create_object GOLD
+{
+	number_of_objects 100000
+	terrain_to_place_on DIRT2
+  	set_gaia_object_only
+	resource_delta -500
+}
+
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     1
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+/* ****************************************************** */
+
+<CONNECTION_GENERATION>
+
+create_connect_all_players_land 
+{
+replace_terrain 	DIRT3 	FOREST
+terrain_cost 	DIRT3 2
+terrain_size    	DIRT3	1   0
+}
+
+create_connect_all_players_land 
+{
+replace_terrain 	DIRT2 	FOREST
+terrain_cost 	DIRT2 1
+terrain_size    	DIRT2	2   0
+}
+
+

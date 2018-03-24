@@ -1,0 +1,104 @@
+/* ****************************************************** */
+<PLAYER_SETUP>
+random_placement
+
+/* ****************************************************** */
+<LAND_GENERATION>
+
+base_terrain DLC_MANGROVESHALLOW
+
+#const RICEFARM 65
+create_player_lands
+{
+  terrain_type	                RICEFARM
+  land_percent					0
+  base_size 					3
+  border_fuzziness              0
+  left_border					5
+  right_border					5
+  top_border					5
+  bottom_border					5
+  set_zone_by_team
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DLC_BEACH4
+{
+  base_terrain				DLC_MANGROVESHALLOW
+  number_of_tiles			4
+  number_of_clumps			50
+  clumping_factor			0
+}
+
+create_terrain DLC_MANGROVEFOREST
+{
+  base_terrain				DLC_MANGROVESHALLOW
+  land_percent				100
+  number_of_clumps			1
+  clumping_factor			100
+  spacing_to_other_terrain_types 2
+}
+
+/* It seems Dock can put between DLC_BEACH4 and DLC_MANGROVESHALLOW,
+but can't put between DLC_BEACH4 and DLC_MANGROVEFOREST. */
+
+/* ****************************************************** */
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* Only Dolphin(61) and Marlin fish(450,451) can put on DLC_MANGROVESHALLOW and DLC_MANGROVEFOREST terrain */
+/* but chopping wood and fishing at same time?! Crazy idea! LOL */
+/*#const DOLPHIN 61
+create_object DOLPHIN
+{
+	number_of_objects 9999999
+	terrain_to_place_on DLC_MANGROVEFOREST
+    set_gaia_object_only
+	set_scaling_to_map_size
+}
+*/
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     1
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+/* It actually put three villager. */
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       2
+  max_distance_to_players       4
+ }
+
+if REGICIDE
+create_object VILLAGER
+{
+  number_of_objects             7
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+}
+
+create_object CASTLE
+{
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    10
+}
+
+endif
+
+/* ****************************************************** */

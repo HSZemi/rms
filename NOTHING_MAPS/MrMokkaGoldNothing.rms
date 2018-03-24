@@ -1,0 +1,137 @@
+/* ************ Boar Nothing ************ */
+/* 22 FEB 18 */
+
+#const CARRY_CAP 14
+#const SET_ATTRIBUTE 0
+#const VILLAGER_CLASS 904
+#const WORK_RATE 13
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+
+random_placement
+
+effect_amount SET_ATTRIBUTE VILLAGER_CLASS WORK_RATE 5
+effect_amount SET_ATTRIBUTE VILLAGER_CLASS CARRY_CAP 100
+
+/* ****************************************************** */
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands
+{ 
+	terrain_type GRASS
+	land_percent 25
+	base_size 9
+	border_fuzziness 15
+	clumping_factor 15
+	set_zone_randomly
+	other_zone_avoidance_distance 0
+	left_border 10
+	right_border 10
+	top_border 10
+	bottom_border 10
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+create_terrain GRASS1
+{
+	base_terrain GRASS
+	land_percent 3
+	number_of_clumps 40
+	set_scale_by_size
+	spacing_to_other_terrain_types 0
+	set_avoid_player_start_areas
+	clumping_factor 1
+}
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* CREATE STUFF FOR PLAYERS */
+create_object TOWN_CENTER
+{
+	number_of_objects 1
+	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+
+create_object MARKET
+{
+	number_of_objects 1
+	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 4
+	max_distance_to_players 4
+}
+
+
+/* SPECIAL STUFF FOR REGICIDE */
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players			4
+	max_distance_to_players			4
+}
+endif
+
+/* BOARS */
+create_object GOLD
+{
+	number_of_objects				2500
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			5
+	resource_delta -700
+	
+}
+create_object GOLD
+{
+	number_of_objects				2500
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			5
+	resource_delta -700
+}
+create_object GOLD
+{
+	number_of_objects				2500
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			5
+	resource_delta -700
+}
+
+create_object GOLD
+{
+	number_of_objects				2500
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players			5
+	resource_delta -700
+}
+
+
+
+
+/* ****************************************************** */
+<ELEVATION_GENERATION>
+
+
+/* ****************************************************** */
+/* <CLIFF_GENERATION> */
+
+
+

@@ -1,0 +1,10044 @@
+/* EVERYTHING RANDOM v3 */
+/* includes nomad landnomad regicide and deathmatch */
+
+
+#const FURIOUS 860
+#const OUTLAW 158
+
+start_random
+	percent_chance 30 #define RARE
+	percent_chance 70 #define NORMAL
+end_random
+
+
+
+start_random
+	percent_chance 15 #define CONVERTABLE
+	percent_chance 85 #define TAKEN
+end_random
+
+start_random
+percent_chance 10 #define KINGGAME
+percent_chance 5 #define LANDLESSKING
+percent_chance 85 #define NOKING
+end_random
+
+if NOKING
+start_random
+percent_chance 9 #define NOMADIC
+percent_chance 6 #define HUTPEOPLE
+percent_chance 85 #define TOWNCENT
+end_random
+endif
+
+if KINGSGAME
+start_random
+	percent_chance 30 #define JAG
+	percent_chance 50 #define WOO
+	percent_chance 20 #define NOTHING
+end_random
+
+elseif TOWNCENT
+start_random
+	percent_chance 30 #define JAG
+	percent_chance 50 #define WOO
+	percent_chance 20 #define NOTHING
+end_random
+
+else 	#define NOTHING
+endif
+
+if TOWNCENT
+start_random
+	percent_chance 10 #define LIMITLESS
+	percent_chance 90 #define DUTCHWAY
+end_random
+endif
+
+start_random
+	percent_chance 20 #define ONELAND
+	percent_chance 20 #define TWOLAND
+	percent_chance 20 #define THREELAND
+	percent_chance 20 #define FOURLAND
+	percent_chance 20 #define FIVELAND
+end_random
+
+start_random
+	percent_chance 90 #define ONEPLAYERLAND
+	percent_chance 6 #define TWOPLAYERLAND
+	percent_chance 4 #define THREEPLAYERLAND
+end_random
+
+if KINGGAME
+#const KING 434
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+#const AMOUNT_GOLD 3
+#const SET_ATTRIBUTE 0
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+#const AMOUNT_BUILDING_TRICKLE_GOLD 208
+#const BUILDING_TRICKLE_GOLD 151
+#const POP_HEADROOM 4
+
+<PLAYER_SETUP>
+  random_placement
+guard_state KING AMOUNT_GOLD 0 1
+	ai_info_map_type ARABIA 0 0 0
+	effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET -100
+	effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET -50
+	effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 300
+	effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 300	
+
+elseif LANDLESSKING
+
+#const KING 434
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+#const AMOUNT_GOLD 3
+#const SET_ATTRIBUTE 0
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+#const AMOUNT_BUILDING_TRICKLE_GOLD 208
+#const BUILDING_TRICKLE_GOLD 151
+
+<PLAYER_SETUP>
+  random_placement
+	ai_info_map_type NOMAD 1 0 1
+	guard_state KING AMOUNT_GOLD 0 1
+	effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET -100
+   	effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET 50
+    	effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 300
+    	effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 575	
+
+elseif NOMADIC
+<PLAYER_SETUP>
+	random_placement
+	nomad_resources
+	ai_info_map_type NOMAD 1 0 1
+
+elseif LIMITLESS
+
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+#const SET_ATTRIBUTE 0
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+
+<PLAYER_SETUP>
+  random_placement
+	ai_info_map_type ARABIA 0 0 0
+	effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET 9900
+   	effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET 4800
+    	effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 19800
+    	effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 19800	
+
+elseif HUTPEOPLE
+<PLAYER_SETUP>
+  random_placement
+  ai_info_map_type NOMAD 1 0 1
+
+else
+<PLAYER_SETUP>
+  random_placement
+
+endif
+
+
+<LAND_GENERATION>
+
+start_random 
+	percent_chance 18
+	base_terrain GRASS
+	percent_chance 15
+	base_terrain FOREST
+	percent_chance 10
+	base_terrain LEAVES
+	percent_chance 5
+	base_terrain ICE
+	percent_chance 15
+	base_terrain WATER
+	percent_chance 5
+	base_terrain SHALLOW
+	percent_chance 5
+	base_terrain BEACH
+	percent_chance 15
+	base_terrain DIRT
+	percent_chance 10
+	base_terrain SNOW
+	percent_chance 2
+	base_terrain ROAD2
+end_random
+
+if ONEPLAYERLAND
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if TWOPLAYERLAND
+
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if THREEPLAYERLAND
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_player_lands
+{
+start_random
+	percent_chance 11
+  	terrain_type GRASS
+	percent_chance 7
+  	terrain_type GRASS2
+	percent_chance 7
+  	terrain_type GRASS3
+	percent_chance 5
+  	terrain_type SHALLOW 
+	percent_chance 5
+  	terrain_type ICE	
+	percent_chance 7
+  	terrain_type DIRT	
+	percent_chance 7
+  	terrain_type DIRT2
+	percent_chance 7
+  	terrain_type DIRT3
+	percent_chance 7
+  	terrain_type SNOW	
+	percent_chance 6
+  	terrain_type GRASS_SNOW	
+	percent_chance 6
+  	terrain_type DIRT_SNOW
+	percent_chance 7
+  	terrain_type DESERT
+	percent_chance 5
+  	terrain_type BEACH	
+	percent_chance 6
+  	terrain_type LEAVES
+	percent_chance 4
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 10
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20	
+	percent_chance 10
+  	land_percent 25
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 40
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 65
+	percent_chance 10
+  	land_percent 80
+	percent_chance 5
+  	land_percent 100
+end_random
+
+start_random 
+	percent_chance 20
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,30)
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,30)
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border rnd(10,40)
+  	left_border 0
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border rnd(10,40)
+	bottom_border rnd(10,40)
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 5
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 5
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if 	ONELAND
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if TWOLAND
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if THREELAND
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if FOURLAND
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+if FIVELAND
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+create_land  
+{
+start_random
+	percent_chance 6
+  	terrain_type GRASS
+	percent_chance 3
+  	terrain_type GRASS2
+	percent_chance 4
+  	terrain_type GRASS3
+	percent_chance 3
+  	terrain_type SHALLOW 
+	percent_chance 9
+  	terrain_type WATER
+	percent_chance 4
+  	terrain_type MED_WATER
+	percent_chance 3
+  	terrain_type DEEP_WATER
+	percent_chance 3
+  	terrain_type PALM_DESERT	
+	percent_chance 3
+  	terrain_type JUNGLE
+	percent_chance 3
+  	terrain_type SNOW_FOREST
+	percent_chance 3
+  	terrain_type PINE_FOREST
+	percent_chance 3
+  	terrain_type BAMBOO
+	percent_chance 5
+  	terrain_type FOREST
+	percent_chance 4
+  	terrain_type DIRT	
+	percent_chance 4
+  	terrain_type DIRT2
+	percent_chance 4
+  	terrain_type DIRT3
+	percent_chance 5
+  	terrain_type SNOW	
+	percent_chance 5
+  	terrain_type GRASS_SNOW	
+	percent_chance 5
+  	terrain_type DIRT_SNOW
+	percent_chance 5
+  	terrain_type DESERT
+	percent_chance 3
+  	terrain_type BEACH	
+	percent_chance 5
+  	terrain_type LEAVES
+	percent_chance 3
+  	terrain_type ROAD
+	percent_chance 3
+  	terrain_type ICE
+	percent_chance 2
+  	terrain_type ROAD2
+end_random
+
+start_random 
+	percent_chance 5
+  	land_percent 5
+	percent_chance 10
+  	land_percent 15
+	percent_chance 10
+  	land_percent 20
+	percent_chance 10
+  	land_percent 30	
+	percent_chance 10
+  	land_percent 35
+	percent_chance 10
+  	land_percent 40	
+	percent_chance 10
+  	land_percent 45
+	percent_chance 10
+  	land_percent 50
+	percent_chance 10
+  	land_percent 55
+	percent_chance 10
+  	land_percent 75
+	percent_chance 5
+  	land_percent 90
+end_random
+
+start_random 
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 30
+  	left_border 0
+	bottom_border 0
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 30
+	bottom_border 0
+	percent_chance 10
+  	top_border 15
+	right_border 15
+  	left_border 15
+	bottom_border 15
+	percent_chance 10
+  	top_border 0
+	right_border 40
+  	left_border 0
+	bottom_border 40
+	percent_chance 10
+  	top_border 0
+	right_border 0
+  	left_border 40
+	bottom_border 40
+	percent_chance 10
+  	top_border -5
+	right_border -5
+  	left_border -5
+	bottom_border -5
+	percent_chance 10
+  	top_border 22
+	right_border 22
+  	left_border 22
+	bottom_border 22
+	percent_chance 10
+  	top_border 8
+	right_border 8
+  	left_border 8
+	bottom_border 8
+	percent_chance 10
+  	top_border 30
+	right_border 30
+  	left_border 30
+	bottom_border 30
+end_random
+
+start_random 
+	percent_chance 10
+  	base_size 6	
+	percent_chance 10
+  	base_size 8	
+	percent_chance 10
+  	base_size 10	
+	percent_chance 10
+  	base_size 12
+	percent_chance 10
+  	base_size 14
+	percent_chance 10
+  	base_size 16	
+	percent_chance 10
+  	base_size 18	
+	percent_chance 10
+  	base_size 22	
+	percent_chance 10
+  	base_size 26
+	percent_chance 10
+  	base_size 30
+end_random
+
+start_random 
+	percent_chance 10
+  	border_fuzziness 0
+	percent_chance 10
+  	border_fuzziness 1
+	percent_chance 10
+  	border_fuzziness 10
+	percent_chance 10
+  	border_fuzziness 20
+	percent_chance 10
+  	border_fuzziness 30
+	percent_chance 10
+  	border_fuzziness 50	
+	percent_chance 10
+  	border_fuzziness 65	
+	percent_chance 10
+  	border_fuzziness 80	
+	percent_chance 10
+  	border_fuzziness 95
+	percent_chance 10
+  	border_fuzziness 100
+end_random
+
+start_random 
+	percent_chance 10
+  	clumping_factor -99
+	percent_chance 10
+  	clumping_factor -50
+	percent_chance 10
+  	clumping_factor -25
+	percent_chance 10
+  	clumping_factor 5
+	percent_chance 10
+  	clumping_factor 15
+	percent_chance 10
+  	clumping_factor 25	
+	percent_chance 10
+  	clumping_factor 50	
+	percent_chance 10
+  	clumping_factor 75	
+	percent_chance 10
+  	clumping_factor 90
+	percent_chance 10
+  	clumping_factor 99
+end_random
+
+
+start_random
+	percent_chance 20
+	zone 1
+	percent_chance 20
+	zone 2
+	percent_chance 30
+	set_zone_randomly
+	percent_chance 30
+	set_zone_by_team
+end_random
+
+start_random
+	percent_chance 10
+	other_zone_avoidance_distance 0
+	percent_chance 10
+	other_zone_avoidance_distance 1
+	percent_chance 10
+	other_zone_avoidance_distance 2
+	percent_chance 10
+	other_zone_avoidance_distance 3
+	percent_chance 10
+	other_zone_avoidance_distance 4
+	percent_chance 10
+	other_zone_avoidance_distance 6
+	percent_chance 10
+	other_zone_avoidance_distance 8
+	percent_chance 10
+	other_zone_avoidance_distance 11
+	percent_chance 10
+	other_zone_avoidance_distance 15
+	percent_chance 10
+	other_zone_avoidance_distance 20
+end_random
+}
+endif
+
+
+
+/********************************************************/
+<TERRAIN_GENERATION>
+
+
+create_terrain GRASS
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 8
+	percent_chance 10
+	spacing_to_other_terrain_types 11
+	percent_chance 10
+	spacing_to_other_terrain_types 14
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+}
+
+create_terrain GRASS
+{
+start_random
+	percent_chance 25
+  	base_terrain SNOW
+	percent_chance 25
+  	base_terrain FOREST
+	percent_chance 25
+  	base_terrain WATER
+	percent_chance 25
+  	base_terrain JUNGLE
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 8
+	percent_chance 10
+	spacing_to_other_terrain_types 11
+	percent_chance 10
+	spacing_to_other_terrain_types 14
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain DIRT
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 8
+	percent_chance 10
+	spacing_to_other_terrain_types 11
+	percent_chance 10
+	spacing_to_other_terrain_types 14
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+}
+
+create_terrain DESERT
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 8
+	percent_chance 10
+	spacing_to_other_terrain_types 11
+	percent_chance 10
+	spacing_to_other_terrain_types 14
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain LEAVES
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 8
+	percent_chance 10
+	spacing_to_other_terrain_types 11
+	percent_chance 10
+	spacing_to_other_terrain_types 14
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain GRASS2
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain GRASS3
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain DIRT2
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+create_terrain DIRT3
+{
+start_random
+	percent_chance 25
+  	base_terrain ICE
+	percent_chance 25
+  	base_terrain ROAD
+	percent_chance 25
+  	base_terrain BEACH
+	percent_chance 25
+  	base_terrain SHALLOW
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 18
+	percent_chance 10
+	land_percent 25
+	percent_chance 10
+	land_percent 33
+	percent_chance 10
+	land_percent 45
+	percent_chance 10
+	land_percent 60
+	percent_chance 10
+	land_percent 80
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+set_scale_by_size
+set_scale_by_groups
+
+}
+
+
+
+/*****FORESTS*****/
+
+create_terrain PALM_DESERT
+{
+  	base_terrain BEACH
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain SNOW_FOREST
+{
+  	base_terrain ICE
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain FOREST
+{
+  	base_terrain LEAVES
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain PALM_DESERT
+{
+  	base_terrain DESERT
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+
+create_terrain SNOW_FOREST
+{
+  	base_terrain GRASS_SNOW
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain FOREST
+{
+  	base_terrain GRASS
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+
+create_terrain PINE_FOREST
+{
+  	base_terrain DIRT
+
+start_random
+	percent_chance 10
+	land_percent 4
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 8
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+
+create_terrain SNOW_FOREST
+{
+start_random
+	percent_chance 6
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 8
+  	base_terrain SNOW	
+	percent_chance 8
+  	base_terrain GRASS_SNOW	
+	percent_chance 8
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 2
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+
+
+
+create_terrain PINE_FOREST
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain FOREST
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain PALM_DESERT
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+create_terrain BAMBOO
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+}
+
+create_terrain JUNGLE
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+
+
+create_terrain SNOW_FOREST
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+}
+
+create_terrain PINE_FOREST
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain FOREST
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain PALM_DESERT
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+create_terrain BAMBOO
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain JUNGLE
+{
+start_random
+	percent_chance 3
+  	base_terrain GRASS
+	percent_chance 3
+  	base_terrain GRASS2
+	percent_chance 4
+  	base_terrain GRASS3
+	percent_chance 3
+  	base_terrain SHALLOW 
+	percent_chance 9
+  	base_terrain WATER
+	percent_chance 4
+  	base_terrain MED_WATER
+	percent_chance 3
+  	base_terrain DEEP_WATER
+	percent_chance 3
+  	base_terrain PALM_DESERT	
+	percent_chance 3
+  	base_terrain JUNGLE
+	percent_chance 3
+  	base_terrain SNOW_FOREST
+	percent_chance 3
+  	base_terrain PINE_FOREST
+	percent_chance 3
+  	base_terrain BAMBOO
+	percent_chance 5
+  	base_terrain FOREST
+	percent_chance 4
+  	base_terrain DIRT	
+	percent_chance 4
+  	base_terrain DIRT2
+	percent_chance 4
+  	base_terrain DIRT3
+	percent_chance 5
+  	base_terrain SNOW	
+	percent_chance 5
+  	base_terrain GRASS_SNOW	
+	percent_chance 5
+  	base_terrain DIRT_SNOW
+	percent_chance 5
+  	base_terrain DESERT
+	percent_chance 4
+  	base_terrain BEACH	
+	percent_chance 5
+  	base_terrain LEAVES
+	percent_chance 3
+  	base_terrain ROAD
+	percent_chance 3
+  	base_terrain ICE
+	percent_chance 5
+  	base_terrain ROAD2
+end_random
+
+start_random
+	percent_chance 10
+	land_percent 1
+	percent_chance 10
+	land_percent 3
+	percent_chance 10
+	land_percent 5
+	percent_chance 10
+	land_percent 7
+	percent_chance 10
+	land_percent 10
+	percent_chance 10
+	land_percent 12
+	percent_chance 10
+	land_percent 15
+	percent_chance 10
+	land_percent 20
+	percent_chance 10
+	land_percent 30
+	percent_chance 10
+	land_percent 45
+end_random
+
+start_random
+	percent_chance 10
+	number_of_clumps 2
+	percent_chance 10
+	number_of_clumps 4
+	percent_chance 10
+	number_of_clumps 6
+	percent_chance 10
+	number_of_clumps 10
+	percent_chance 10
+	number_of_clumps 15
+	percent_chance 10
+	number_of_clumps 20
+	percent_chance 10
+	number_of_clumps 25
+	percent_chance 10
+	number_of_clumps 30
+	percent_chance 10
+	number_of_clumps 40
+	percent_chance 10
+	number_of_clumps 100
+end_random
+
+start_random
+	percent_chance 20
+	spacing_to_other_terrain_types 0
+	percent_chance 20
+	spacing_to_other_terrain_types 1
+	percent_chance 20
+	spacing_to_other_terrain_types 2
+	percent_chance 10
+	spacing_to_other_terrain_types 3
+	percent_chance 10
+	spacing_to_other_terrain_types 4
+	percent_chance 10
+	spacing_to_other_terrain_types 5
+	percent_chance 10
+	spacing_to_other_terrain_types 6
+end_random
+
+start_random
+	percent_chance 20
+	clumping_factor 1
+	percent_chance 10
+	clumping_factor 5
+	percent_chance 10
+	clumping_factor 10
+	percent_chance 10
+	clumping_factor 20
+	percent_chance 10
+	clumping_factor 40
+	percent_chance 20
+	clumping_factor 60
+	percent_chance 20
+	clumping_factor 99
+end_random
+
+	set_avoid_player_start_areas
+
+}
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types 2
+}
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/**** BASIC STARTING TOWN ******/
+
+if KINGGAME
+
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	group_placement_radius 18
+	min_distance_to_players 0
+	max_distance_to_players	0
+}
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+
+create_object VILLAGER
+{
+	number_of_objects 7
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+}
+
+create_object SCOUT
+{
+start_random
+	percent_chance 5
+	number_of_objects 0
+	percent_chance 80
+	number_of_objects 1
+	percent_chance 10
+	number_of_objects 2
+	percent_chance 5
+	number_of_objects 4
+end_random
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 9
+}
+
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 7
+}
+
+start_random
+	percent_chance 40
+create_object CASTLE
+{
+	set_place_for_every_player
+	min_distance_to_players 10
+	max_distance_to_players 10
+}
+
+	percent_chance 30
+create_object WATCH_TOWER
+{
+	set_place_for_every_player
+	min_distance_to_players 9
+	max_distance_to_players 9
+}
+	percent_chance 30
+end_random
+
+
+elseif LANDLESSKING
+
+create_object VILLAGER
+{
+set_place_for_every_player
+temp_min_distance_group_placement 15
+min_distance_group_placement 3
+min_distance_to_players 15
+max_distance_to_players 60
+}
+
+create_object VILLAGER
+{
+number_of_groups 7
+number_of_objects 1
+set_place_for_every_player
+temp_min_distance_group_placement 15
+min_distance_group_placement 3
+min_distance_to_players 15
+max_distance_to_players 60
+}
+
+create_object KING
+{
+set_place_for_every_player
+max_distance_to_players 20
+}
+endif
+
+
+if NOMADIC
+
+create_object VILLAGER
+{
+set_place_for_every_player
+temp_min_distance_group_placement 15
+min_distance_group_placement 3
+min_distance_to_players 15
+max_distance_to_players 60
+}
+
+elseif TOWNCENT
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	group_placement_radius 18
+	min_distance_to_players	0
+	max_distance_to_players	0
+}
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+
+create_object SCOUT
+{
+start_random
+	percent_chance 5
+	number_of_objects 0
+	percent_chance 80
+	number_of_objects 1
+	percent_chance 10
+	number_of_objects 2
+	percent_chance 5
+	number_of_objects 4
+end_random
+	set_place_for_every_player
+	min_distance_to_players 7
+	max_distance_to_players 9
+}
+
+elseif HUTPEOPLE
+create_object YURT  
+{
+	set_place_for_every_player
+	group_placement_radius 18
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+
+create_object VILLAGER
+{
+	set_place_for_every_player
+	min_distance_to_players	6
+	max_distance_to_players 6
+}
+
+create_object SCOUT
+{
+start_random
+	percent_chance 90
+	number_of_objects 0
+	percent_chance 7
+	number_of_objects 1
+	percent_chance 2
+	number_of_objects 2
+	percent_chance 1
+	number_of_objects 4
+end_random
+	set_place_for_every_player
+	min_distance_to_players			7
+	max_distance_to_players			9
+}
+endif
+
+/* ******BONUS VILLAGERS****** */
+
+
+create_object VILLAGER 
+{
+start_random
+	percent_chance 90
+	number_of_objects 0
+	percent_chance 5
+	number_of_objects 2
+	percent_chance 2
+	number_of_objects 4
+	percent_chance 1
+	number_of_objects 10
+	percent_chance 1
+	number_of_objects 25
+	percent_chance 1
+	number_of_objects 40
+end_random
+	set_place_for_every_player
+	min_distance_to_players			6
+	max_distance_to_players			9
+}
+
+/* REGICIDE GAME MODE FOR DOUBLE REGICIDE */
+
+if REGICIDE
+
+create_object VILLAGER
+{
+number_of_objects 7
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 7
+}
+
+create_object KING
+{
+set_place_for_every_player
+min_distance_to_players 6
+max_distance_to_players 7
+}
+
+
+create_object CASTLE
+{
+set_place_for_every_player
+min_distance_to_players 10
+max_distance_to_players 11
+}
+
+endif
+
+/* ****TOWN UPGRADE***** */
+
+start_random
+	percent_chance 4
+create_object BARRACKS
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 96
+end_random
+
+start_random
+	percent_chance 3
+create_object ARCHERY_RANGE
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 2
+create_object MONASTERY
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 4
+create_object MARKET
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 96
+end_random
+
+start_random
+	percent_chance 1
+create_object SIEGE_WORKSHOP
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 99
+end_random
+
+start_random
+	percent_chance 2
+create_object BLACKSMITH
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 98
+end_random
+
+
+start_random
+	percent_chance 3
+create_object UNIVERSITY
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 4
+create_object MILL
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 96
+end_random
+
+
+start_random
+	percent_chance 7
+create_object HOUSE
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,8)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 93
+end_random
+
+start_random
+	percent_chance 4
+create_object WATCH_TOWER
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,8)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 96
+end_random
+
+start_random
+	percent_chance 3
+create_object OUTPOST
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,5)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 2
+create_object CASTLE
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 5
+create_object WALL
+{
+number_of_objects 9999
+set_place_for_every_player
+min_distance_to_players rnd(16,20)
+max_distance_to_players rnd(20,25)
+}
+	percent_chance 95
+end_random
+
+start_random
+	percent_chance 5
+create_object PALISADE_WALL
+{
+number_of_objects 9999
+set_place_for_every_player
+min_distance_to_players rnd(16,20)
+max_distance_to_players rnd(20,25)
+}
+	percent_chance 95
+end_random
+
+/* ******MIRACULOUS START******* */
+
+
+if RARE
+start_random
+	percent_chance 1
+create_object WONDER
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 3
+create_object CASTLE
+{
+  	set_place_for_every_player
+	number_of_objects rnd(2,4)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}	
+	percent_chance 3
+create_object GUARD_TOWER
+{
+  	set_place_for_every_player
+	number_of_objects rnd(5,10)
+  	min_distance_to_players 8
+  	max_distance_to_players 14
+}
+	percent_chance 2
+create_object BOMBARD_TOWER
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,7)
+  	min_distance_to_players 9
+  	max_distance_to_players 14
+}
+	percent_chance 3
+create_object FORTIFIED_WALL
+{
+  	set_place_for_every_player
+	number_of_objects rnd(50,100)
+  	min_distance_to_players 10
+  	max_distance_to_players 14
+}
+	percent_chance 2
+create_object SIEGE_ONAGER
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 2
+create_object TREBUCHET
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 1
+create_object GENGHIS_KHAN
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 12
+create_object HUNTING_WOLF
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object KING_ALFONSO
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object MASTER_OF_THE_TEMPLAR
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object SCYTHIAN_WILD_WOMAN
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object ROBIN_HOOD
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object CHAMPION
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 2
+create_object PALADIN
+{
+  	set_place_for_every_player
+	number_of_objects 1
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object ARBALEST
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,6)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object MILITIA
+{
+  	set_place_for_every_player
+	number_of_objects rnd(20,32)
+  	min_distance_to_players 9
+  	max_distance_to_players 14
+}
+	percent_chance 5
+create_object TRADE_CART
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,3)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 10
+create_object PETARD
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,3)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 3
+create_object PETARD
+{
+  	set_place_for_every_player
+	number_of_objects rnd(10,30)
+  	min_distance_to_players 9
+  	max_distance_to_players 14
+}
+	percent_chance 7
+create_object MONK
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,2)
+  	min_distance_to_players 9
+  	max_distance_to_players 11
+}
+	percent_chance 5
+create_object TURKEY
+{
+  	set_place_for_every_player
+	number_of_objects rnd(15,25)
+  	min_distance_to_players 9
+  	max_distance_to_players 15
+}
+
+	percent_chance 18
+create_object TURKEY
+{
+  	set_place_for_every_player
+	number_of_objects rnd(1,6)
+  	min_distance_to_players 11
+  	max_distance_to_players 13
+}
+
+end_random
+endif
+
+/***GAIA OBJECTS***/
+
+
+
+create_object RELIC
+{
+start_random
+percent_chance 6
+	number_of_objects 2
+   	number_of_groups rnd(1,6)
+percent_chance 6
+	number_of_objects 3
+   	number_of_groups rnd(1,6)
+percent_chance 75
+	number_of_objects rnd(1,6)
+percent_chance 13
+	number_of_objects 0
+end_random
+
+start_random
+percent_chance 10
+ 	min_distance_to_players 10
+  	max_distance_to_players 20
+percent_chance 30
+ 	min_distance_to_players 20
+  	max_distance_to_players 40
+percent_chance 60
+ 	min_distance_to_players 25
+  	max_distance_to_players 100
+end_random
+
+	set_scaling_to_player_number
+   	temp_min_distance_group_placement rnd(1,14)
+}
+
+
+create_object GOLD /* primary */
+{
+  	number_of_objects          rnd(0,12)
+  	group_placement_radius     4
+  	set_tight_grouping
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players    rnd(7,14)
+  	max_distance_to_players    16
+  	min_distance_group_placement  rnd(2,7)
+}
+
+
+create_object STONE /* primary */
+{
+  	number_of_objects          rnd(0,12)
+  	group_placement_radius     4
+  	set_tight_grouping
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players    rnd(7,14)
+  	max_distance_to_players    16
+  	min_distance_group_placement  rnd(2,7)
+}
+
+create_object GOLD /* secondary */
+{
+	number_of_objects rnd(0,6)
+	set_tight_grouping
+	group_placement_radius 3
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players rnd(14,19)
+	max_distance_to_players 25
+	min_distance_group_placement rnd(2,7)
+	max_distance_to_other_zones rnd(3,15)
+}
+
+create_object STONE /* secondary */
+{
+	number_of_objects rnd(0,6)
+	set_tight_grouping
+	group_placement_radius 3
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players rnd(14,19)
+	max_distance_to_players 25
+	min_distance_group_placement rnd(2,7)
+	max_distance_to_other_zones rnd(3,15)
+}
+
+start_random
+	percent_chance 50
+create_object GOLD /* extra */
+{
+	number_of_objects rnd(0,8)
+	set_tight_grouping
+	group_placement_radius 3
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players rnd(14,19)
+	max_distance_to_players 25
+	min_distance_group_placement rnd(2,7)
+	max_distance_to_other_zones rnd(3,15)
+}
+	percent_chance 50
+end_random
+
+start_random
+	percent_chance 50
+create_object STONE /* extra */
+{
+	number_of_objects rnd(0,8)
+	set_tight_grouping
+	group_placement_radius 3
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players rnd(14,19)
+	max_distance_to_players 25
+	min_distance_group_placement rnd(2,7)
+	max_distance_to_other_zones rnd(3,15)
+}
+	percent_chance 50
+end_random
+
+
+create_object GOLD /* extra */
+{
+	number_of_objects rnd(3,5)
+	number_of_groups rnd(0,5)
+	group_variance 1
+	set_tight_grouping
+	group_placement_radius 3
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 20
+	min_distance_to_players 30
+}
+create_object STONE /* extra */
+{
+	number_of_objects rnd(3,5)
+	number_of_groups rnd(0,3)
+	group_variance 1
+	set_tight_grouping
+	group_placement_radius 3
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 20
+	min_distance_to_players 30
+}
+if WOO
+create_object WOLF
+{
+	number_of_objects rnd(1,2)
+	number_of_groups rnd(2,10)
+	group_variance 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_to_players rnd(22,30)
+	max_distance_to_players rnd(40,80)
+start_random
+percent_chance 3
+	temp_min_distance_group_placement 2
+percent_chance 4
+	temp_min_distance_group_placement 4
+percent_chance 10
+	temp_min_distance_group_placement 7
+percent_chance 16
+	temp_min_distance_group_placement 10
+percent_chance 30
+	temp_min_distance_group_placement 15
+percent_chance 27
+	temp_min_distance_group_placement 20
+percent_chance 10
+	temp_min_distance_group_placement 25
+end_random
+}
+elseif JAG
+create_object JAGUAR
+{
+	number_of_objects rnd(1,2)
+	number_of_groups rnd(2,10)
+	group_variance 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_to_players rnd(22,30)
+	max_distance_to_players rnd(40,80)
+start_random
+percent_chance 3
+	temp_min_distance_group_placement 2
+percent_chance 4
+	temp_min_distance_group_placement 4
+percent_chance 10
+	temp_min_distance_group_placement 7
+percent_chance 16
+	temp_min_distance_group_placement 10
+percent_chance 30
+	temp_min_distance_group_placement 15
+percent_chance 27
+	temp_min_distance_group_placement 20
+percent_chance 10
+	temp_min_distance_group_placement 25
+end_random
+}
+endif
+
+start_random
+	percent_chance 3
+create_object IRON_BOAR
+{
+	number_of_objects rnd(1,2)
+	number_of_groups rnd(4,10)
+	group_variance 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_to_players rnd(28,36)
+	max_distance_to_players rnd(40,80)
+	temp_min_distance_group_placement 23
+}
+	percent_chance 97
+end_random
+
+
+start_random
+	percent_chance 2
+create_object FURIOUS
+{
+	number_of_objects rnd(1,2)
+	number_of_groups rnd(4,10)
+	group_variance 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_to_players rnd(28,36)
+	max_distance_to_players rnd(40,80)
+	temp_min_distance_group_placement 23
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 2
+create_object OUTLAW
+{
+	number_of_objects rnd(0,4)
+	number_of_groups rnd(4,15)
+	group_variance 1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_to_players rnd(28,36)
+	max_distance_to_players rnd(40,80)
+	temp_min_distance_group_placement rnd(18,25)
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 90
+create_object SHORE_FISH
+{
+number_of_objects rnd(20,100)
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement rnd(0,10)
+min_distance_group_placement rnd(0,5)
+}
+	percent_chance 10
+end_random
+
+start_random
+	percent_chance 70
+create_object DORADO
+{
+number_of_objects rnd(5,100)
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement rnd(0,20)
+min_distance_group_placement rnd(0,5)
+terrain_to_place_on MED_WATER
+}
+	percent_chance 30
+end_random
+
+start_random
+	percent_chance 70
+create_object SALMON
+{
+number_of_objects rnd(5,100)
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement rnd(0,20)
+min_distance_group_placement rnd(0,5)
+terrain_to_place_on MED_WATER
+}
+	percent_chance 30
+end_random
+
+start_random
+	percent_chance 90
+create_object MARLIN1
+{
+number_of_objects 25
+set_scaling_to_map_size
+set_gaia_object_only
+temp_min_distance_group_placement rnd(0,5)
+min_distance_group_placement rnd(0,5)
+terrain_to_place_on DEEP_WATER
+}
+	percent_chance 10
+end_random
+
+create_object SHEEP /* primary */
+{
+   	number_of_objects rnd(1,8)
+   	set_loose_grouping
+   	set_gaia_object_only
+   	set_place_for_every_player
+   	min_distance_to_players    9
+   	max_distance_to_players    11
+}
+create_object SHEEP /* secondary */
+{
+   	number_of_objects rnd(1,3)
+	number_of_groups 2
+   	set_loose_grouping
+   	set_gaia_object_only
+   	set_place_for_every_player
+   	min_distance_to_players    11
+   	max_distance_to_players    24
+	terrain_to_place_on GRASS3
+}
+
+start_random
+	percent_chance 5
+create_object FORAGE 
+{
+	number_of_objects rnd(7,20)
+	set_tight_grouping
+	group_placement_radius 4
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players rnd(8,11)
+	max_distance_to_players rnd(12,15)
+}
+	percent_chance 95
+end_random
+
+start_random
+	percent_chance 60
+create_object FORAGE 
+{
+	number_of_objects rnd(1,6)
+	set_tight_grouping
+	group_placement_radius 4
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players rnd(8,11)
+	max_distance_to_players rnd(12,15)
+}
+	percent_chance 40
+end_random
+
+start_random
+	percent_chance 60
+create_object FORAGE 
+{
+	number_of_objects rnd(1,6)
+	set_tight_grouping
+	group_placement_radius 4
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players rnd(8,11)
+	max_distance_to_players rnd(12,15)
+}
+	percent_chance 40
+end_random
+
+create_object BOAR
+{
+	number_of_objects rnd(0,5)
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players rnd(8,15)
+	max_distance_to_players rnd(15,28)
+}
+
+start_random
+	percent_chance 5
+create_object DEER
+{
+	number_of_objects rnd(0,12)
+	set_place_for_every_player
+	group_variance 1
+	set_gaia_object_only
+	set_loose_grouping
+	min_distance_to_players rnd(10,18)
+	max_distance_to_players rnd(20,30)
+}
+	percent_chance 95
+end_random
+
+start_random
+	percent_chance 70
+create_object DEER
+{
+	number_of_objects rnd(1,4)
+	set_place_for_every_player
+	set_gaia_object_only
+	group_variance 1
+	set_loose_grouping
+	min_distance_to_players rnd(10,18)
+	max_distance_to_players rnd(20,30)
+}
+	percent_chance 30
+end_random
+
+start_random
+	percent_chance 70
+create_object DEER
+{
+	number_of_objects rnd(1,6)
+	set_place_for_every_player
+	set_gaia_object_only
+	group_variance 1
+	set_loose_grouping
+	min_distance_to_players rnd(10,18)
+	max_distance_to_players rnd(20,30)
+}
+	percent_chance 30
+end_random
+
+create_object PINE_FOREST_TREE 
+{
+  	number_of_objects             3
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players       4
+  	max_distance_to_players       5
+  	min_distance_group_placement  2
+}
+create_object PINE_FOREST_TREE
+{
+  	number_of_objects             3
+  	set_gaia_object_only
+  	set_place_for_every_player
+  	min_distance_to_players       6
+ 	max_distance_to_players       8
+  	min_distance_group_placement  2
+}
+start_random
+	percent_chance 50
+create_object PINE_FOREST_TREE
+{
+  	number_of_objects             rnd(10,20)
+  	set_gaia_object_only
+	set_scaling_to_map_size
+  	min_distance_to_players       rnd(11,20)
+  	max_distance_to_players       70
+  	min_distance_group_placement  rnd(4,7)
+}
+	percent_chance 50
+create_object JUNGLE_TREE
+{
+  	number_of_objects             rnd(10,20)
+  	set_gaia_object_only
+	set_scaling_to_map_size
+  	min_distance_to_players       rnd(11,20)
+  	max_distance_to_players       70
+  	min_distance_group_placement  rnd(4,7)
+}
+end_random
+
+
+/* ***** CONVERTABLE ***** */
+
+if CONVERTABLE
+
+start_random
+	percent_chance 10
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 5
+create_object SCOUT
+{
+	number_of_objects rnd(2,8)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 10
+create_object ARCHER
+{
+	number_of_objects rnd(4,12)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 8
+create_object TRADE_CART
+{
+	number_of_objects rnd(2,5)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 8
+create_object VILLAGER
+{
+	number_of_objects rnd(3,7)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 10
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(2,5)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 10
+create_object KING
+{
+	number_of_objects rnd(2,5)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 9
+create_object OUTPOST
+{
+	number_of_objects rnd(2,7)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 8
+create_object MILITIA
+{
+	number_of_objects rnd(4,15)
+	set_scaling_to_player_number
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 8
+create_object TORCH_CONVERTING
+{
+	number_of_objects rnd(2,10)
+	set_scaling_to_player_number
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 4
+create_object BATTERING_RAM
+{
+	number_of_objects rnd(2,6)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 6
+}
+	percent_chance 10
+create_object DEMOLITION_SHIP
+{
+	number_of_objects rnd(2,6)
+	set_scaling_to_player_number
+	set_gaia_object_only
+	min_distance_to_players 18
+	temp_min_distance_group_placement 5
+}
+end_random
+endif
+/* ***** DECORATION ***** */
+
+start_random
+	percent_chance 2
+create_object PYRAMID
+{
+  	number_of_objects             1
+  	set_gaia_object_only
+	min_distance_to_players 25
+}
+	percent_chance 1
+create_object PYRAMID
+{
+  	number_of_objects             rnd(2,6)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 18
+	min_distance_to_players 25
+	set_scaling_to_map_size
+}
+	percent_chance 1
+create_object PYRAMID
+{
+  	number_of_objects             rnd(15,25)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players 25
+	set_scaling_to_map_size
+}
+	percent_chance 1
+create_object GREAT_PYRAMID
+{
+  	number_of_objects             1
+  	set_gaia_object_only
+	min_distance_to_players 25
+}
+	percent_chance 1
+create_object DOME_OF_THE_ROCK
+{
+  	number_of_objects             1
+  	set_gaia_object_only
+	min_distance_to_players 25
+}
+	percent_chance 94
+end_random
+
+start_random
+	percent_chance 2
+create_object TRADE_WORKSHOP
+{
+  	number_of_objects             rnd(2,6)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 20
+	min_distance_to_players rnd(15,25)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 3
+create_object FLOWER_BED
+{
+  	number_of_objects             rnd(6,20)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 10
+	min_distance_to_players rnd(18,25)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 2
+create_object MOUNTAIN_1
+{
+  	number_of_objects             rnd(1,10)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 2
+create_object MOUNTAIN_2
+{
+  	number_of_objects             rnd(1,10)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 2
+create_object MOUNTAIN_3
+{
+  	number_of_objects             rnd(1,10)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 2
+create_object MOUNTAIN_4
+{
+  	number_of_objects             rnd(1,10)
+  	set_gaia_object_only
+	temp_min_distance_group_placement 5
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+
+	percent_chance 2
+create_object RUINS
+{
+  	number_of_objects             rnd(6,20)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(10,15)
+	min_distance_to_players rnd(18,30)
+	set_scaling_to_map_size
+}
+	percent_chance 98
+end_random
+
+start_random
+	percent_chance 3
+create_object SIGN
+{
+  	number_of_objects             rnd(6,20)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(7,15)
+	min_distance_to_players rnd(18,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object ROCK
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(9,15)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object OLD_STONE_HEAD
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(6,15)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object NINE_BANDS
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(6,15)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object HAY_STACK
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(6,15)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object GRAVE
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(3,8)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 3
+create_object HEAD
+{
+  	number_of_objects             rnd(20,100)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(3,8)
+	min_distance_to_players rnd(15,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+start_random
+	percent_chance 4
+create_object DEER
+{
+  	number_of_objects             rnd(20,50)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(5,10)
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 96
+end_random
+
+start_random
+	percent_chance 3
+create_object SHEEP
+{
+  	number_of_objects             rnd(20,50)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(5,10)
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+
+start_random
+	percent_chance 3
+create_object WILD_HORSE
+{
+  	number_of_objects             rnd(20,50)
+  	set_gaia_object_only
+	temp_min_distance_group_placement rnd(5,10)
+	min_distance_to_players rnd(20,30)
+	set_scaling_to_map_size
+}
+	percent_chance 97
+end_random
+
+
+<CONNECTION_GENERATION>
+
+/***WATER CROSSING***/
+start_random 
+	percent_chance 50
+create_connect_teams_lands 
+{
+replace_terrain WATER SHALLOW
+replace_terrain MED_WATER SHALLOW
+replace_terrain DEEP_WATER SHALLOW
+terrain_cost WATER 4
+terrain_cost MED_WATER 4
+terrain_cost DEEP_WATER 4
+terrain_size WATER 3 2
+terrain_size MED_WATER 2 1
+terrain_size DEEP_WATER 2 0
+}
+	percent_chance 50
+end_random
+
+start_random
+	percent_chance 50
+create_connect_all_lands 
+{
+replace_terrain WATER SHALLOW
+replace_terrain MED_WATER SHALLOW
+replace_terrain DEEP_WATER SHALLOW
+terrain_cost WATER 4
+terrain_cost MED_WATER 4
+terrain_cost DEEP_WATER 4
+terrain_size WATER 3 2
+terrain_size MED_WATER 2 1
+terrain_size DEEP_WATER 2 0
+}
+	percent_chance 50
+end_random
+
+start_random
+	percent_chance 50
+create_connect_all_players_land 
+{
+replace_terrain WATER SHALLOW
+replace_terrain MED_WATER SHALLOW
+replace_terrain DEEP_WATER SHALLOW
+terrain_cost WATER 4
+terrain_cost MED_WATER 4
+terrain_cost DEEP_WATER 4
+terrain_size WATER 3 2
+terrain_size MED_WATER 2 1
+terrain_size DEEP_WATER 2 0
+}
+	percent_chance 50
+end_random
+
+/***FOREST PATHS***/
+start_random 
+	percent_chance 60
+create_connect_teams_lands 
+{
+replace_terrain FOREST LEAVES
+replace_terrain PINE_FOREST LEAVES
+replace_terrain SNOW_FOREST GRASS_SNOW
+replace_terrain PALM_DESERT DESERT
+replace_terrain JUNGLE GRASS
+replace_terrain BAMBOO DIRT2
+terrain_cost FOREST 4
+terrain_cost PINE_FOREST 4
+terrain_cost SNOW_FOREST 4
+terrain_cost PALM_DESERT 4
+terrain_cost JUNGLE 4
+terrain_cost BAMBOO 4
+terrain_size FOREST 6 2
+terrain_size PINE_FOREST 6 2
+terrain_size SNOW_FOREST 6 2
+terrain_size PALM_DESERT 6 2
+terrain_size JUNGLE 6 2
+terrain_size BAMBOO 6 2
+}
+	percent_chance 40
+end_random
+
+start_random
+	percent_chance 60
+create_connect_all_lands 
+{
+replace_terrain FOREST LEAVES
+replace_terrain PINE_FOREST LEAVES
+replace_terrain SNOW_FOREST GRASS_SNOW
+replace_terrain PALM_DESERT DESERT
+replace_terrain JUNGLE GRASS
+replace_terrain BAMBOO DIRT2
+terrain_cost FOREST 4
+terrain_cost PINE_FOREST 4
+terrain_cost SNOW_FOREST 4
+terrain_cost PALM_DESERT 4
+terrain_cost JUNGLE 4
+terrain_cost BAMBOO 4
+terrain_size FOREST 6 2
+terrain_size PINE_FOREST 6 2
+terrain_size SNOW_FOREST 6 2
+terrain_size PALM_DESERT 6 2
+terrain_size JUNGLE 6 2
+terrain_size BAMBOO 6 2
+}
+	percent_chance 40
+end_random
+
+start_random
+	percent_chance 60
+create_connect_all_players_land 
+{
+replace_terrain FOREST LEAVES
+replace_terrain PINE_FOREST LEAVES
+replace_terrain SNOW_FOREST GRASS_SNOW
+replace_terrain PALM_DESERT DESERT
+replace_terrain JUNGLE GRASS
+replace_terrain BAMBOO DIRT2
+terrain_cost FOREST 4
+terrain_cost PINE_FOREST 4
+terrain_cost SNOW_FOREST 4
+terrain_cost PALM_DESERT 4
+terrain_cost JUNGLE 4
+terrain_cost BAMBOO 4
+terrain_size FOREST 6 2
+terrain_size PINE_FOREST 6 2
+terrain_size SNOW_FOREST 6 2
+terrain_size PALM_DESERT 6 2
+terrain_size JUNGLE 6 2
+terrain_size BAMBOO 6 2
+}
+	percent_chance 40
+end_random
+
+/****ELEVATION****/
+
+start_random
+percent_chance 30
+percent_chance 70
+<ELEVATION_GENERATION>
+end_random
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		GRASS
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		GRASS
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		GRASS2
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		GRASS2
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		GRASS3
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		GRASS3
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		DIRT
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		DIRT
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		DIRT2
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		DIRT2
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		DIRT3
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		DIRT3
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		GRASS_SNOW
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		GRASS_SNOW
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+if TINY_MAP
+	create_elevation	rnd(1,5)
+	{
+		base_terrain		SNOW
+		number_of_clumps	rnd(7,20)
+		number_of_tiles		rnd(1000,4000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+else
+	create_elevation	rnd(2,7)
+	{
+		base_terrain		SNOW
+		number_of_clumps	rnd(10,30)
+		number_of_tiles		rnd(2000,6000)
+		set_scale_by_groups
+		set_scale_by_size
+	}
+endif
+
+
+/****CLIFFS****/
+start_random
+percent_chance 60
+percent_chance 40
+<CLIFF_GENERATION>
+end_random
+
+if TINY_MAP
+	min_number_of_cliffs	2
+	max_number_of_cliffs	8
+	min_length_of_cliff	1
+	max_length_of_cliff	8
+	cliff_curliness		rnd(0,5)
+	min_distance_cliffs	rnd(1,7)
+else
+	min_number_of_cliffs	5
+	max_number_of_cliffs	25
+	min_length_of_cliff	1
+	max_length_of_cliff	20
+	cliff_curliness		rnd(1,20)
+	min_distance_cliffs	rnd(1,7)
+endif

@@ -1,0 +1,136 @@
+
+/* ****************************************************** */
+/* **************** GOLD_NOTHING_LIGHT ****************** */
+/* ****************************************************** */
+
+/* ****************** SIEGE CAN CUT ********************* */
+/* ****************** 300G PER PILE ********************* */
+/* **************** START WITH MARKET ******************* */
+
+/* ****************************************************** */
+
+<PLAYER_SETUP>
+random_placement
+
+/* ****************************************************** */
+
+#const SET_ATTRIBUTE 0
+#const MOD_RESOURCE 1
+#const ATTR_SET 0
+#const POP_HEADROOM 4
+#const ATTR_BLAST_LEVEL 44
+#const SET_ATTRIBUTE 0
+
+<PLAYER_SETUP>
+  random_placement
+
+	effect_amount SET_ATTRIBUTE MANGONEL ATTR_BLAST_LEVEL 0
+	effect_amount SET_ATTRIBUTE ONAGER ATTR_BLAST_LEVEL 0
+	effect_amount SET_ATTRIBUTE SIEGE_ONAGER ATTR_BLAST_LEVEL 0
+	effect_amount SET_ATTRIBUTE BOMBARD_CANNON ATTR_BLAST_LEVEL 0
+	effect_amount SET_ATTRIBUTE TREBUCHET ATTR_BLAST_LEVEL 0
+
+
+if REGICIDE
+
+	effect_amount MOD_RESOURCE POP_HEADROOM ATTR_SET 10
+endif
+
+
+<LAND_GENERATION>
+base_terrain DESERT
+
+
+
+create_player_lands
+{
+	terrain_type			DIRT
+	set_zone_by_team
+	top_border			7
+	left_border			7
+	bottom_border			7
+	right_border			7
+  	border_fuzziness                 100
+  	number_of_tiles 150
+
+  	set_zone_by_team
+
+  	zone 1
+  	other_zone_avoidance_distance 11
+
+  	land_percent                     0
+  	base_size			4
+}
+
+
+/* ****************************************************** */
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+
+create_object GOLD
+{
+	number_of_objects 230400
+	terrain_to_place_on DESERT
+  	set_gaia_object_only
+	resource_delta -500
+}
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     1
+  min_distance_to_players    0
+  max_distance_to_players    0
+  }
+  create_object MARKET
+{
+  set_place_for_every_player
+  group_placement_radius     1
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+set_place_for_every_player
+min_distance_to_players 2
+max_distance_to_players 2
+}
+
+
+if REGICIDE
+
+create_object VILLAGER
+
+{
+
+  number_of_objects             7
+
+  set_place_for_every_player
+
+  min_distance_to_players       3
+  max_distance_to_players       3
+}
+
+
+
+create_object KING
+
+{
+
+  set_place_for_every_player
+
+  min_distance_to_players       3
+  max_distance_to_players       3
+
+}
+
+
+
+endif
+
+/* ****************************************************** */
+

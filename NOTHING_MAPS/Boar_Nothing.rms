@@ -1,0 +1,116 @@
+/* ************ AEGEAN ISLANDS by tanks ************ */
+
+
+#include_drs random_map.def 54000
+
+#const  WATERW  28
+
+/* ****************************************************** */
+<PLAYER_SETUP>
+  random_placement  /* note this is only currently valid entry */ 
+
+/* ****************************************************** */
+<LAND_GENERATION>
+base_terrain GRASS
+
+/* exp. with size -- was 40% and 7 dist rivers */
+
+create_player_lands 
+{            
+if GRASS
+  terrain_type                     GRASS
+endif
+  land_percent                     2
+  base_size                        1
+  left_border                      6
+  right_border                     6
+  top_border                       6
+  bottom_border                   6
+  other_zone_avoidance_distance    9		
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain FOREST
+{
+base_terrain GRASS
+number_of_clumps               1000
+land_percent 10
+set_avoid_player_start_areas
+}
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* PLAYER START OBJECTS */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     18
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+ }
+
+create_object SCOUT
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       7
+  max_distance_to_players       9
+ }
+
+/* SPECIAL STUFF FOR REGICIDE */
+
+if REGICIDE
+create_object VILLAGER
+{
+  number_of_objects             7
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+}
+
+create_object WATCH_TOWER
+{
+  set_place_for_every_player
+  min_distance_to_players    4
+  max_distance_to_players    10
+}
+
+endif
+
+create_object BOAR
+{
+  number_of_objects          9999
+  set_gaia_object_only
+  min_distance_to_players    6
+   temp_min_distance_group_placement 2
+   temp_max_distance_group_placement 3
+}
+
+create_object IRON_BOAR
+{
+   number_of_objects            9999
+  set_gaia_object_only
+  min_distance_to_players    12
+   temp_min_distance_group_placement 8
+   temp_max_distance_group_placement 10
+   resource_delta -360
+}
+
+<CONNECTION_GENERATION>

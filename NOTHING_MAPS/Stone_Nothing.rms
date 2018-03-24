@@ -1,0 +1,134 @@
+/* ************ ARENA ************ */
+<PLAYER_SETUP>
+
+random_placement
+
+<LAND_GENERATION>
+
+base_terrain DESERT
+
+
+/* Fill in center */
+
+
+create_player_lands  
+{            
+terrain_type                     GRASS2
+number_of_tiles 10
+base_size                        4
+left_border                      6
+right_border                     6
+top_border                       6
+bottom_border                    6
+border_fuzziness                 1
+other_zone_avoidance_distance    0
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+
+create_terrain FOREST
+{
+     base_terrain DESERT
+     spacing_to_other_terrain_types 0
+     land_percent 6
+     number_of_clumps 100
+
+     set_scale_by_groups
+}
+
+
+
+/* ****************************************************** */
+<OBJECTS_GENERATION>
+
+/* ******* LAND AND WATER RESOURCES ************ */
+
+/* PLAYER START OBJECTS */
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     18
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+ }
+
+
+if REGICIDE
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+}
+endif
+
+create_object STONE
+{
+ number_of_objects          4
+  number_of_groups        9999999
+  group_placement_radius     0
+  set_tight_grouping
+  set_gaia_object_only
+  min_distance_to_players      6
+  min_distance_group_placement  0
+  terrain_to_place_on      DESRET
+  resource_delta           -320
+}
+
+create_object TREE_K
+{
+  number_of_objects          1
+number_of_groups 1337
+
+  set_tight_grouping
+  group_placement_radius     0
+  set_gaia_object_only
+  min_distance_to_players       1
+  max_distance_to_players       5
+  min_distance_group_placement  0
+  set_place_for_every_player
+  resource_delta           -25
+
+}
+
+<CONNECTION_GENERATION>

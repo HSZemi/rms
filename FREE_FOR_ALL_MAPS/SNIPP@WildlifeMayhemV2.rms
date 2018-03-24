@@ -1,0 +1,629 @@
+<PLAYER_SETUP>
+  random_placement 
+	ai_info_map_type ARABIA 0 0 0
+
+
+<LAND_GENERATION>
+
+#const SAVANNAH 14
+
+base_terrain SAVANNAH
+
+create_player_lands
+{
+  terrain_type SAVANNAH
+  land_percent 40
+  base_size 10
+  border_fuzziness 20
+clumping_factor 20
+other_zone_avoidance_distance 0
+}
+
+/* *********************************** */
+<TERRAIN_GENERATION>
+
+#const ACACIA_FOREST 41
+
+create_terrain ACACIA_FOREST
+{
+base_terrain SAVANNAH
+land_percent 14
+number_of_clumps 100
+spacing_to_other_terrain_types 4
+set_avoid_player_start_areas
+}
+
+#const BAOBAB 16
+
+create_terrain BAOBAB
+{
+base_terrain SAVANNAH
+land_percent 14
+number_of_clumps 100
+spacing_to_other_terrain_types 4
+set_avoid_player_start_areas
+}
+
+#const DIRT4 3
+
+create_terrain DIRT4
+{
+base_terrain SAVANNAH
+land_percent 10
+number_of_clumps 80
+}
+
+#const QUICKSAND 40
+
+create_terrain QUICKSAND
+{
+base_terrain DIRT4
+land_percent 15
+number_of_clumps 40
+set_avoid_player_start_areas
+}
+
+#const CRACKEDIT 6
+
+create_terrain CRACKEDIT
+{
+base_terrain SAVANNAH
+land_percent 100
+number_of_clumps 200
+set_avoid_player_start_areas
+}
+
+create_terrain WATER
+{
+base_terrain CRACKEDIT
+land_percent 15
+number_of_clumps 50
+spacing_to_other_terrain_types 1
+set_avoid_player_start_areas
+}
+
+<OBJECTS_GENERATION>
+
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     18
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       6
+ }
+
+create_object HORSE
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       5
+  max_distance_to_players       6
+ }
+#const AOEMONK 1023
+
+create_object AOEMONK
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       5
+  max_distance_to_players       6
+ }
+create_object RELIC
+{
+  number_of_objects             5
+  set_place_for_every_player
+  min_distance_to_players       5
+  max_distance_to_players       6
+ }
+ 
+#const FENCE 1062
+create_object FENCE
+{
+  set_place_for_every_player
+  min_distance_to_players       12
+  max_distance_to_players       15
+}
+
+#const MONKEYBOY 860
+create_object MONKEYBOY
+{
+  number_of_objects             4
+  min_distance_to_players       20
+  set_gaia_object_only
+  set_scaling_to_map_size
+}
+if REGICIDE
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+}
+
+create_object THE_TOWER_OF_FLIES
+{
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    12
+}
+
+#const QUEEN 923
+
+create_object QUEEN
+{
+  set_place_for_every_player
+  min_distance_to_players    6
+  max_distance_to_players    8
+}
+
+endif
+
+#const GOATEE 1060
+
+create_object GOATEE
+{
+   number_of_objects 4
+   set_loose_grouping
+   number_of_groups 20
+   set_gaia_object_only
+   set_scaling_to_map_size
+   min_distance_to_players    9
+}
+create_object DEER
+{
+   number_of_objects 4
+   set_loose_grouping
+   number_of_groups 12
+   set_gaia_object_only
+   set_scaling_to_map_size
+   min_distance_to_players    9
+}
+
+#const ZEBRA 1019
+#const OSTRICH 1026
+
+create_object ZEBRA
+{
+   number_of_objects 3
+   number_of_groups 12
+   set_loose_grouping
+   set_scaling_to_map_size
+   set_gaia_object_only
+   min_distance_to_players    13
+}
+
+create_object OSTRICH
+{
+   number_of_objects 3
+   number_of_groups 12
+   set_loose_grouping
+   set_scaling_to_map_size
+   set_gaia_object_only
+}
+
+create_object MACAW
+{
+   number_of_objects 1
+   number_of_groups 5
+   set_loose_grouping
+   set_scaling_to_map_size
+   set_gaia_object_only
+}
+#const ELEPHANT 936
+
+create_object ELEPHANT
+{
+   number_of_objects 2
+   number_of_groups 12
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+}
+
+#const CROCO 1031
+
+create_object CROCO
+{
+   number_of_objects 7
+   number_of_groups 4
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    20
+}
+
+#const BEARS 486
+
+create_object BEARS
+{
+   number_of_objects 2
+   number_of_groups 10
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    20
+}
+
+create_object TORCH_CONVERTING
+{
+   number_of_objects 1
+   number_of_groups 15
+   set_scaling_to_map_size
+   set_loose_grouping
+   min_distance_to_players    25
+}
+
+
+create_object FLOWER_BED
+{
+   number_of_objects 1
+   number_of_groups 5
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    17
+}
+#const SAVANNAHPATCH 1033
+
+create_object SAVANNAHPATCH
+{
+   number_of_objects 1
+   number_of_groups 5
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    17
+}
+
+create_object JAGUAR
+{
+   number_of_objects 4
+   number_of_groups 10
+   set_loose_grouping
+   set_scaling_to_map_size
+   set_gaia_object_only
+     min_distance_to_players    20
+}
+
+#const PENGUIN 639
+
+create_object IRON_BOAR
+{
+   number_of_objects 1
+   number_of_groups 4
+   set_loose_grouping
+   set_scaling_to_map_size
+   set_gaia_object_only
+   min_distance_to_players    20
+}
+
+create_object PENGUIN
+{
+  number_of_objects 1
+  set_place_for_every_player
+  min_distance_to_players       8
+  max_distance_to_players       10
+}
+
+create_object BOAR
+{
+   number_of_objects 2
+   number_of_groups 20
+   set_loose_grouping
+   set_gaia_object_only
+   set_scaling_to_map_size
+}
+
+create_object RABID_WOLF
+{
+   number_of_objects 3
+   number_of_groups 15
+   set_loose_grouping
+   set_gaia_object_only
+   set_scaling_to_map_size
+    min_distance_to_players    20
+}
+
+create_object TURKEY
+{
+   number_of_objects 3
+   number_of_groups 30
+   set_loose_grouping
+   set_gaia_object_only
+   set_scaling_to_map_size
+}
+#const ORANGEBUSH 1059
+
+create_object ORANGEBUSH 
+{
+   number_of_objects 3
+   number_of_groups 25
+   set_tight_grouping
+   set_gaia_object_only
+}
+
+create_object GOLD
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    7
+  max_distance_to_players    12
+  temp_min_distance_group_placement  5
+}
+
+create_object GOLD
+{
+  number_of_objects          8
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    16
+  temp_min_distance_group_placement  5
+}
+
+create_object STONE
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    7
+  max_distance_to_players    11
+  temp_min_distance_group_placement  5
+}
+
+create_object STONE
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players    10
+  max_distance_to_players    16
+  temp_min_distance_group_placement  5
+}
+
+/* DISTANT GOLD AND STONE */
+
+create_object GOLD
+{
+  number_of_groups 180
+  number_of_objects 6
+  group_placement_radius 2
+  set_tight_grouping
+  set_gaia_object_only
+  min_distance_to_players 30
+  temp_min_distance_group_placement 45
+  max_distance_to_other_zones 2
+}
+
+create_object STONE
+{
+  number_of_groups 180
+  number_of_objects 6
+  group_placement_radius 2
+  set_tight_grouping
+  set_gaia_object_only
+  min_distance_to_players 30
+  temp_min_distance_group_placement 45
+  max_distance_to_other_zones 2
+}
+
+#const ACACIATREE 1063
+
+create_object ACACIATREE 
+{
+  number_of_objects             2
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       5
+  min_distance_group_placement  2
+}
+create_object ACACIATREE 
+{
+  number_of_objects             3
+  set_gaia_object_only
+  set_place_for_every_player
+  min_distance_to_players       6
+  max_distance_to_players       8
+  min_distance_group_placement  2
+}
+
+create_object ACACIATREE 
+{
+  number_of_objects          20
+  set_gaia_object_only
+  set_scaling_to_map_size
+  min_distance_to_players    8
+}
+
+#const AFROBOULDER_A 1048
+#const AFROBOULDER_B 1049
+#const AFROBOULDER_C 1050
+#const AFROBUSH 1053
+#const AFROBUSH2 1055
+#const LION 1029
+
+create_object LION
+{
+     number_of_groups 15
+     set_loose_grouping
+		number_of_objects 3
+     set_gaia_object_only
+	   min_distance_to_players    20
+	   set_scaling_to_map_size
+
+}
+
+create_object DLC_KOMODO
+
+{
+   number_of_objects 7
+   number_of_groups 4
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    20
+
+}
+
+create_object DLC_TIGER
+{
+     number_of_groups 10
+     set_loose_grouping
+		number_of_objects 4
+     set_gaia_object_only
+	   min_distance_to_players    20
+	   set_scaling_to_map_size
+
+}
+
+create_object DLC_RHINO
+{
+     number_of_groups 15
+     set_loose_grouping
+		number_of_objects 2
+     set_gaia_object_only
+	   min_distance_to_players    17
+	   set_scaling_to_map_size
+
+}
+
+create_object DLC_WATERBUFFALO
+{
+     number_of_groups 12
+     set_loose_grouping
+		number_of_objects 2
+     set_gaia_object_only
+	   min_distance_to_players    17
+	   set_scaling_to_map_size
+
+}
+
+
+#const DOLPHIN 61
+
+create_object DOLPHIN
+{
+  number_of_objects 70
+     set_scaling_to_map_size
+     set_gaia_object_only
+	 set_scaling_to_map_size
+	 set_scaling_to_map_size
+}
+
+create_object DLC_BOXTURTLE
+{
+  number_of_objects 70
+     set_scaling_to_map_size
+     set_gaia_object_only
+	 set_scaling_to_map_size
+	 set_scaling_to_map_size
+}
+
+create_object AFROBOULDER_A 
+{
+  number_of_objects 999
+     set_scaling_to_map_size
+     temp_min_distance_group_placement 60
+     set_gaia_object_only
+     min_distance_to_players 14
+}
+
+create_object AFROBOULDER_B
+{
+  number_of_objects 999
+     set_scaling_to_map_size
+     temp_min_distance_group_placement 60
+     set_gaia_object_only
+     min_distance_to_players 14
+}
+
+create_object DLC_ROCKJUNGLE
+{
+  number_of_objects 999
+     set_scaling_to_map_size
+     temp_min_distance_group_placement 60
+     set_gaia_object_only
+     min_distance_to_players 14
+}
+
+create_object DLC_ROCKBEACH
+{
+  number_of_objects 999
+     set_scaling_to_map_size
+     temp_min_distance_group_placement 60
+     set_gaia_object_only
+     min_distance_to_players 14
+}
+
+create_object DLC_FERN_PATCH
+{
+number_of_objects 1
+   number_of_groups 5
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    17
+}
+
+#const GRASSPATCH 301
+
+create_object GRASSPATCH
+{
+number_of_objects 1
+   number_of_groups 5
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    17
+}
+
+create_object AFROBOULDER_C
+{
+  number_of_objects 999
+     set_scaling_to_map_size
+     temp_min_distance_group_placement 60
+     set_gaia_object_only
+     min_distance_to_players 14
+}
+
+create_object AFROBUSH
+{
+number_of_objects 1
+   number_of_groups 15
+   set_scaling_to_map_size
+   set_loose_grouping
+   set_gaia_object_only
+   min_distance_to_players    17
+}
+
+
+/* ****************************************************** */
+
+<ELEVATION_GENERATION>
+
+create_elevation 7
+{
+ base_terrain SAVANNAH
+  number_of_clumps 50
+  number_of_tiles 8000
+clumping_factor 1
+}
