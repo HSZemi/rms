@@ -16,6 +16,8 @@
 #const STARTING_GOLD 94
 #const MOD_RESOURCE 1
 #const ATTR_SET 0
+#const DATA_MODE_FLAGS 1
+#const GAIA_SET_PLAYER_DATA -10
 
 
 /* ****************************************************** */
@@ -34,6 +36,9 @@
   effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 300
   effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET -100
   effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET -50
+
+  /* Set to 0 for Spies only, 3 for Treason only, 1 for both Spies and Treason */
+  effect_amount GAIA_SET_PLAYER_DATA DATA_MODE_FLAGS ATTR_SET 1 
 
 
 /* ****************************************************** */
