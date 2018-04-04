@@ -135,23 +135,12 @@
 		max_distance_to_players					3
 	}
 	
-	if REGICIDE
 	create_object KING
 	{
 		set_place_for_every_player
 		min_distance_to_players					4
 		max_distance_to_players					4
 	}
-	endif
-	
-	if KING_OT_HILL
-	create_object KING
-	{
-		set_place_for_every_player
-		min_distance_to_players					4
-		max_distance_to_players					4
-	}
-	endif
 	
 	create_object TRANSPORT_SHIP
 	{

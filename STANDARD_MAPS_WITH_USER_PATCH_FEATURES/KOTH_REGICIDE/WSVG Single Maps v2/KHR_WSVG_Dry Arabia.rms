@@ -239,7 +239,6 @@ create_object RELIC
 /* SPECIAL STUFF FOR REGICIDE */
 /* FORTRESS AND MIGRATION NEED TO BE UPDATED */
 
-if REGICIDE
 create_object VILLAGER
 {
   number_of_objects             7
@@ -262,32 +261,6 @@ create_object CASTLE
   max_distance_to_players    10
 }
 
-endif
-
-if KING_OT_HILL
-create_object VILLAGER
-{
-  number_of_objects             7
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-create_object KING
-{
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-create_object CASTLE
-{
-  set_place_for_every_player
-  min_distance_to_players    10
-  max_distance_to_players    10
-}
-
-endif
 
 /* NEAR FORAGE */
 

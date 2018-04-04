@@ -375,21 +375,12 @@ create_object RELIC
 
 /* SPECIAL STUFF FOR REGICIDE */
 
-if REGICIDE
 create_object KING
 {
   set_place_for_every_player
   min_distance_to_players       25
 }
-endif
 
-if KING_OT_HILL
-create_object KING
-{
-  set_place_for_every_player
-  min_distance_to_players       25
-}
-endif
 
 /* NEAR FORAGE */
 

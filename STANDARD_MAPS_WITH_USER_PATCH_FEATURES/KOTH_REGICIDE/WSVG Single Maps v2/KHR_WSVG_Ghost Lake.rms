@@ -184,7 +184,6 @@ create_object SCOUT
 
 /* SPECIAL STUFF FOR REGICIDE */
 
-if REGICIDE
 create_object VILLAGER
 {
   number_of_objects             7
@@ -206,31 +205,6 @@ create_object CASTLE
   min_distance_to_players    10
   max_distance_to_players    10
 }
-endif
-
-if KING_OT_HILL
-create_object VILLAGER
-{
-  number_of_objects             7
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-create_object KING
-{
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-create_object CASTLE
-{
-  set_place_for_every_player
-  min_distance_to_players    10
-  max_distance_to_players    10
-}
-endif
 
 create_object SHEEP
 {

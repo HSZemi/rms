@@ -30,6 +30,7 @@
 
   /* Set to 0 for Spies only, 3 for Treason only, 1 for both Spies and Treason */
   effect_amount GAIA_SET_PLAYER_DATA DATA_MODE_FLAGS ATTR_SET 1
+
 /* ****************************************************** */
 
 start_random
@@ -1232,7 +1233,6 @@ create_object SCOUT
   max_distance_to_players 9
 }
 
-if REGICIDE
 create_object VILLAGER
 {
   number_of_objects             7
@@ -1256,34 +1256,6 @@ create_object CASTLE
   min_distance_to_players    10
   max_distance_to_players    10
 }
-endif
-endif
-
-if KING_OT_HILL
-create_object VILLAGER
-{
-  number_of_objects             7
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-create_object KING
-{
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       6
-}
-
-if WSVG_CHAOS_PIT
-else
-create_object CASTLE
-{
-  set_place_for_every_player
-  min_distance_to_players    10
-  max_distance_to_players    10
-}
-endif
 endif
 
 start_random
@@ -1572,6 +1544,7 @@ create_object DORADO
      min_distance_group_placement 4
 }
 create_object TUNA
+{
   number_of_objects 19
   set_scaling_to_map_size
   set_gaia_object_only
@@ -1579,6 +1552,7 @@ create_object TUNA
      min_distance_group_placement 4
 }
 create_object SNAPPER
+{
   number_of_objects 19
   set_scaling_to_map_size
   set_gaia_object_only
@@ -2849,6 +2823,7 @@ create_object DORADO
      min_distance_group_placement 4
 }
 create_object TUNA
+{
   number_of_objects 19
   set_scaling_to_map_size
   set_gaia_object_only
@@ -2856,6 +2831,7 @@ create_object TUNA
      min_distance_group_placement 4
 }
 create_object SNAPPER
+{
   number_of_objects 19
   set_scaling_to_map_size
   set_gaia_object_only
