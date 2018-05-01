@@ -1,0 +1,421 @@
+#const SET_ATTRIBUTE 0
+#const AMOUNT_GOLD 3
+#const KING_ALFONSO 840
+#const ATTR_MOVE_SPEED 5
+
+
+<PLAYER_SETUP>
+  direct_placement
+  guard_state KING_ALFONSO AMOUNT_GOLD 0 1
+  effect_amount SET_ATTRIBUTE KING_ALFONSO ATTR_MOVE_SPEED 1
+  effect_amount SET_ATTRIBUTE KING ATTR_MOVE_SPEED 1
+  
+  <LAND_GENERATION>
+
+	base_terrain GRASS
+	
+	create_land
+{
+terrain_type                     GRASS
+land_percent 					55
+left_border                     55
+top_border 							-10
+	bottom_border 						-10
+	other_zone_avoidance_distance 8
+}
+
+create_land
+{
+terrain_type                     WATER
+land_percent 53
+	right_border                      53
+	top_border 							-7
+	bottom_border 						-7
+}
+create_land
+{
+terrain_type                     GRASS3
+	land_percent 100
+	left_border							48
+	right_border                      48
+	other_zone_avoidance_distance		8
+}
+
+create_land
+{
+	land_percent 5
+	terrain_type                     DIRT3
+	base_size		10
+	land_position 20 20
+	assign_to_player 1
+	clumping_factor 99
+	left_border 3
+	top_border 3
+	bottom_border 60
+	right_border 60
+	border_fuzziness 100
+		base_elevation 0
+	other_zone_avoidance_distance	8
+}
+create_land
+{
+	land_percent 5
+	terrain_type                     DIRT3
+	base_size		10
+	land_position 20 80
+	assign_to_player 2
+	clumping_factor 99
+	left_border 3
+	top_border 60
+	bottom_border 3
+	right_border 60
+	border_fuzziness 100
+		base_elevation 0
+	other_zone_avoidance_distance	8
+}
+create_land
+{
+	land_percent 2
+	base_elevation 0
+	terrain_type                     GRASS2
+	base_size		7
+	land_position 80 20
+	assign_to_player 1
+	
+}
+create_land
+{
+	land_percent 2
+	base_elevation 0
+	terrain_type                     GRASS2
+	base_size		7
+	land_position 80 80
+	assign_to_player 2
+}
+<ELEVATION_GENERATION>
+
+create_elevation 4
+{
+    number_of_clumps			12
+		number_of_tiles				3000
+		set_scale_by_groups
+		set_scale_by_size
+		base_terrain		GRASS
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain FOREST
+{
+	base_terrain GRASS3
+	land_percent 100
+	number_of_clumps 1000
+}
+
+create_terrain DIRT2
+
+{
+base_terrain DIRT3
+set_avoid_player_start_areas
+land_percent 2
+number_of_clumps 10
+spacing_to_other_terrain_types 2
+}
+
+create_terrain FOREST
+{
+	base_terrain DIRT2
+	land_percent 100
+	number_of_clumps 1000
+	spacing_to_other_terrain_types 1
+}
+create_terrain FOREST
+{
+base_terrain GRASS
+land_percent 3
+number_of_clumps 22
+spacing_to_other_terrain_types 6
+set_avoid_player_start_areas
+}
+create_terrain FOREST
+{
+base_terrain GRASS
+land_percent 3
+number_of_clumps 6
+spacing_to_other_terrain_types 6
+set_avoid_player_start_areas
+}
+
+create_FOREST
+{
+base_terrain GRASS
+land_percent 2
+number_of_clumps 4
+spacing_to_other_terrain_types 4
+set_avoid_player_start_areas
+clumping_factor 40
+}
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+  set_place_for_every_player
+  group_placement_radius     25
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       6
+}
+
+
+create_object SCOUT
+{
+number_of_objects 1
+set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       6
+}
+create_object SHORE_FISH
+{
+  number_of_objects          		40
+  set_gaia_object_only
+  temp_min_distance_group_placement  	3
+  terrain_to_place_on			WATER
+}
+create_object SALMON
+{
+  terrain_to_place_on			WATER
+  number_of_objects          		58
+  temp_min_distance_group_placement		6
+  set_gaia_object_only
+}
+
+create_object BOAR
+{
+	number_of_objects				1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			14
+}
+create_object BOAR
+{
+	number_of_objects				1
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			16
+}
+create_object DEER
+{
+   number_of_objects 4
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players    12
+   max_distance_to_players	  18
+}
+
+/* BERRIES */
+create_object FORAGE
+{
+	number_of_objects				6
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			9
+	max_distance_to_players			10
+	min_distance_group_placement	6
+}
+
+create_object STONE
+{
+	number_of_objects				5
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			18
+	min_distance_group_placement	7
+}
+create_object GOLD
+{
+	number_of_objects				7
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			16
+	min_distance_group_placement	7
+}
+create_object STONE
+{
+	number_of_objects				4
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			20
+	max_distance_to_players			26
+	min_distance_group_placement	14
+}
+create_object GOLD
+{
+	number_of_objects				4
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			18
+	max_distance_to_players			26
+	min_distance_group_placement	7
+}
+
+create_object GOLD
+{
+	number_of_objects				4
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			25
+	max_distance_to_players			35
+	min_distance_group_placement	7
+}
+create_object SHEEP
+{
+	number_of_groups				1
+	number_of_objects				4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			8
+}
+create_object SHEEP
+{
+	number_of_groups				2
+	number_of_objects				2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			20
+}
+
+/* STRAGGLER TREES */
+create_object OAKTREE
+{
+	number_of_objects				2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			4
+	max_distance_to_players			5
+	min_distance_group_placement	2
+}
+create_object PINETREE
+{
+	number_of_objects				3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			6
+	max_distance_to_players			8
+	min_distance_group_placement	2
+}
+create_object RELIC
+{
+	number_of_objects				5
+	min_distance_to_players			20
+	temp_min_distance_group_placement 30
+}
+
+create_object KING_ALFONSO
+{
+	number_of_objects				1
+	set_place_for_every_player
+	min_distance_to_players			4
+	max_distance_to_players			6
+	terrain_to_place_on GRASS2
+}
+
+/* WOLVES */
+create_object WOLF
+{
+	number_of_groups				3
+	number_of_objects				1
+	set_gaia_object_only
+	min_distance_group_placement	12
+	min_distance_to_players			25
+	max_distance_to_players			120
+	terrain_to_place_on GRASS
+}
+
+create_object WOLF
+{
+	number_of_objects				2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement	12
+	min_distance_to_players			25
+	max_distance_to_players			40
+		terrain_to_place_on GRASS
+}
+
+/* BIRDIES */
+create_object HAWK
+{
+	number_of_objects				10
+}
+create_object GOLD
+{
+	
+	number_of_groups		3
+	number_of_objects		3
+	group_variance			1
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players			30
+	min_distance_group_placement	16
+	terrain_to_place_on GRASS
+}
+create_object STONE
+{
+	number_of_groups		2
+	number_of_objects			4
+	group_variance				1
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_to_players			30
+	min_distance_group_placement	16
+	terrain_to_place_on GRASS
+}
+/* SPECIAL STUFF FOR REGICIDE */
+
+if REGICIDE
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       2
+  max_distance_to_players       4
+  terrain_to_place_on	DIRT3
+}
+
+create_object HOUSE
+{
+  set_place_for_every_player
+  min_distance_to_players       4
+  max_distance_to_players       5
+  terrain_to_place_on	DIRT3
+}
+endif

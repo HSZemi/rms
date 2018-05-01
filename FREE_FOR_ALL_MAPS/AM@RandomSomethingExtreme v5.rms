@@ -1,0 +1,2161 @@
+#const TRADE_WORKSHOP 110
+#const AMOUNT_GOLD 3
+#const GRASSMID 16
+#const ROADMID 40
+#const MILITIA2 299
+#const FURY 860
+#const MONK2 922
+#const FEITORIA2 734
+
+
+
+<PLAYER_SETUP>
+  random_placement
+   guard_state TRADE_WORKSHOP AMOUNT_GOLD 65 2
+	
+	
+<LAND_GENERATION>
+
+base_terrain SHALLOW
+
+create_land
+{
+	land_percent				5
+	terrain_type					GRASS2
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				1
+	zone 1
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+
+create_land
+{
+	land_percent				5
+	terrain_type					GRASS3
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				2
+	zone 2
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					DIRT
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				3
+	zone 3
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					DIRT2
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				4
+	zone 4
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					DIRT3
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				5
+	 zone 5
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					DESERT
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				6
+	zone 6
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					SNOW
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				7
+	zone 7
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}
+create_land
+{
+	land_percent				5
+	terrain_type					LEAVES
+	base_size                        12
+  border_fuzziness                 15
+	assign_to_player 				8
+	zone 8
+	other_zone_avoidance_distance 7
+	left_border			5
+	right_border		5
+	top_border			5
+	bottom_border		5
+}  
+
+create_land
+{
+	land_position 50 50
+	land_percent				16
+	terrain_type					GRASSMID
+	left_border						33
+	right_border						33
+	top_border						33
+	bottom_border						33
+  border_fuzziness                 5
+  zone 9
+	other_zone_avoidance_distance 7
+}  
+
+<TERRAIN_GENERATION>
+
+  create_terrain ROAD
+{
+  base_terrain                  GRASSMID
+  spacing_to_other_terrain_types 2
+  land_percent                   9
+  number_of_clumps               1
+  set_avoid_player_start_areas     
+}
+
+  create_terrain ROAD2
+{
+  base_terrain                  ROAD
+  spacing_to_other_terrain_types 11
+  land_percent                   2
+  number_of_clumps               1
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  ROAD
+  spacing_to_other_terrain_types 1
+  land_percent                   1
+  number_of_clumps              10
+  set_avoid_player_start_areas     
+}
+
+create_terrain WATER
+{
+  base_terrain                  SHALLOW
+  land_percent                   100
+  set_avoid_player_start_areas     
+}
+
+create_terrain SHALLOW
+{
+  base_terrain                  WATER
+  land_percent                   100
+  set_avoid_player_start_areas     
+}
+
+create_terrain FOREST
+{
+  base_terrain                  GRASS2
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  GRASS3
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  DIRT
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  DIRT2
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  DIRT3
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  DESERT
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  SNOW
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+create_terrain FOREST
+{
+  base_terrain                  LEAVES
+  spacing_to_other_terrain_types 3
+  land_percent                   1
+  number_of_clumps              3
+  set_avoid_player_start_areas     
+}
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER
+{
+  	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object TOWN_CENTER
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       2
+  max_distance_to_players       4
+}
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 50
+create_object VILLAGER
+{
+	number_of_objects rnd(1,8)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+create_object SCOUT
+{
+	number_of_objects rnd(0,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9  	  
+}
+end_random
+
+create_object MARLIN1
+{
+  terrain_to_place_on			SHALLOWS
+  number_of_objects					199
+  set_gaia_object_only
+  temp_min_distance_group_placement	2
+}
+
+create_object BOAR
+{
+	number_of_objects				2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			10
+}
+
+create_object SHEEP
+{
+	number_of_objects				4
+	number_of_groups				2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			7
+	max_distance_to_players			9
+}
+
+/* DEER */
+create_object DEER
+{
+	number_of_objects				4
+	group_placement_radius			3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			13
+	max_distance_to_players			13
+	min_distance_group_placement	9
+}
+
+create_object FORAGE
+{
+	number_of_objects				6
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			10
+}
+
+create_object OAKTREE
+{
+	number_of_objects				5
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			4
+	max_distance_to_players			7
+	min_distance_group_placement	2
+}
+
+
+/* BIG GOLD */
+create_object GOLD
+{
+	number_of_objects				7
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			10
+	max_distance_to_players			14
+	min_distance_group_placement	7
+}
+
+/* STONE */
+create_object STONE
+{
+	number_of_objects				4
+	number_of_groups				2
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			18
+	min_distance_group_placement	7
+}
+
+/* GOLD */
+create_object GOLD
+{
+	number_of_objects				4
+	number_of_groups				2
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			18
+	max_distance_to_players			26
+	min_distance_group_placement	7
+}
+
+create_object RELIC
+{
+number_of_objects 9
+	terrain_to_place_on			ROAD2
+	temp_min_distance_group_placement 2
+}
+
+
+
+if REGICIDE
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       5
+}
+endif
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object MONK
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object HUNTING_WOLF
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object CASTLE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 14
+	  max_distance_to_players 18
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object PETARD
+{
+	number_of_objects rnd(2,8)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 14
+create_object TRADE_WORKSHOP
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 18
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object WATCH_TOWER
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 16
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object MONASTERY
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 12
+create_object BARRACKS
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 16
+create_object HOUSE
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	  min_distance_to_players 9
+	  max_distance_to_players 16
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 11
+create_object SABOTEUR
+{
+	number_of_objects rnd(1,4)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 9
+create_object FURY
+{
+	number_of_objects rnd(1,2)
+  	set_place_for_every_player
+	  min_distance_to_players 7
+	  max_distance_to_players 9
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	 min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	 min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+	percent_chance 12
+create_object ARCHERY_RANGE
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 10
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object RELIC
+{
+	number_of_objects rnd(1,5)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object BOAR
+{
+	number_of_objects rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+
+start_random
+	percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 10
+create_object FEITORIA2
+{
+	number_of_objects 1
+  	set_place_for_every_player
+	  min_distance_to_players 12
+	  max_distance_to_players 14
+	  terrain_to_place_on LEAVES  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS2  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on GRASS3  	  
+}
+end_random
+
+start_random
+	percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT2  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DIRT3  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on DESERT  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on SNOW  	  
+}
+end_random
+
+start_random
+		percent_chance 15
+create_object SHEEP
+{
+	number_of_objects 3
+	number_of_groups rnd(1,3)
+  	set_place_for_every_player
+	set_gaia_object_only
+	  min_distance_to_players 6
+	  max_distance_to_players 12
+	  terrain_to_place_on LEAVES  	  
+}
+end_random

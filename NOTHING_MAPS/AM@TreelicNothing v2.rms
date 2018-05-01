@@ -1,0 +1,245 @@
+#const ROADMID 40
+
+<PLAYER_SETUP>
+random_placement
+
+<LAND_GENERATION>
+
+base_terrain DIRT3
+
+create_player_lands
+{
+  terrain_type	                GRASS
+  land_percent                  1
+  left_border                   5
+  right_border                  5
+  top_border                    5
+  bottom_border                 5
+  base_size                     11 
+  other_zone_avoidance_distance 5
+}
+
+create_land
+{
+  terrain_type	                GRASS2
+  land_percent                  6
+  land_position					50 50
+  left_border                   42
+  right_border                  42
+  top_border                    42
+  bottom_border                 42 
+  other_zone_avoidance_distance 0
+  base_elevation				1
+}
+
+create_land
+{
+  terrain_type	                ROAD
+  land_percent                  3
+  land_position					50 50
+  left_border                   44
+  right_border                  44
+  top_border                    44
+  bottom_border                 44 
+  other_zone_avoidance_distance 0
+  base_elevation				4
+}
+
+<ELEVATION_GENERATION>
+create_elevation 4
+{
+	base_terrain GRASS
+	number_of_tiles 500
+	number_of_clumps 1
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain DIRT2
+{
+	base_terrain DIRT3
+	land_percent 2
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain DIRT
+{
+	base_terrain DIRT3
+	land_percent 20
+	number_of_clumps 80
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain DIRT
+{
+	base_terrain DIRT3
+	land_percent 5
+	number_of_clumps 80
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain FOREST
+{
+	base_terrain DIRT3
+	land_percent 100
+	number_of_clumps 1
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 0
+}
+
+create_terrain DESERT
+{
+	base_terrain FOREST
+	land_percent 2
+	number_of_clumps 99
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain GRASS3
+{
+	base_terrain FOREST
+	land_percent 4
+	number_of_clumps 50
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain ROADMID
+{
+	base_terrain ROAD
+	land_percent 2
+	number_of_clumps 1
+	set_avoid_player_start_areas
+	spacing_to_other_terrain_types 4
+}
+
+<OBJECTS_GENERATION>
+
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       0
+  max_distance_to_players       1
+}
+
+
+if REGICIDE
+create_object HOUSE
+{
+  number_of_objects             1
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       4
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       1
+}
+
+endif
+
+
+create_object TOWN_CENTER 
+{
+  set_place_for_every_player
+  group_placement_radius        1
+  min_distance_to_players       0
+  max_distance_to_players       0
+}
+
+create_object MONASTERY
+{
+  set_place_for_every_player
+  group_placement_radius        1
+  min_distance_to_players       4
+  max_distance_to_players       6
+}
+
+create_object MONK
+{
+  set_place_for_every_player
+  group_placement_radius        1
+  min_distance_to_players       4
+  max_distance_to_players       7
+}
+
+
+create_object OAKTREE
+{
+  number_of_objects          199
+  number_of_groups			199
+  set_gaia_object_only
+  terrain_to_place_on 		DIRT
+  set_tight_grouping
+  resource_delta -90
+  group_placement_radius 9
+  min_distance_to_players		18
+  max_distance_to_other_zones 18
+}
+
+create_object OAKTREE
+{
+  number_of_objects          199
+  number_of_groups			199
+  set_gaia_object_only
+  terrain_to_place_on 		GRASS3
+  set_tight_grouping
+  resource_delta -99
+  group_placement_radius 9
+  min_distance_to_players		18
+  max_distance_to_other_zones 18
+}
+
+create_object RELIC
+{
+number_of_objects          99
+  set_gaia_object_only
+  terrain_to_place_on 		DESERT
+  temp_min_distance_group_placement 6
+}
+create_object RELIC
+{
+number_of_objects          99
+  set_gaia_object_only
+  terrain_to_place_on 		DESERT
+  temp_min_distance_group_placement 6
+}
+create_object RELIC
+{
+number_of_objects          99
+  set_gaia_object_only
+  terrain_to_place_on 		ROAD
+  temp_min_distance_group_placement 2
+}
+
+create_object RELIC
+{
+number_of_objects          2
+  set_gaia_object_only
+  terrain_to_place_on 		GRASS
+  temp_min_distance_group_placement 2
+  set_place_for_every_player
+  max_distance_to_players		8
+}
+
+create_object DEER
+{
+number_of_objects          1
+number_of_groups			50
+  set_gaia_object_only
+  set_place_for_every_player
+  terrain_to_place_on 		GRASS
+  temp_min_distance_group_placement 2
+  min_distance_to_players		5
+  max_distance_to_players		18
+  resource_delta	-40
+}
