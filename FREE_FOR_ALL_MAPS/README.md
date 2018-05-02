@@ -7,12 +7,25 @@ by HenkDeSuperNerd
 
 `R_Everything_v3.rms`
 
+[AoCZone](https://www.aoczone.net/viewtopic.php?f=104&t=135135&p=541245#p541245)
+
 
 Random everything extreme
 -------------------------
 by HenkDeSuperNerd
 
 `R_Everything_Extreme_v3.rms`
+
+[AoCZone](https://www.aoczone.net/viewtopic.php?f=104&t=135135&p=541245#p541245)
+
+
+Random Everything Deluxe
+-------------------------
+by HenkDeSuperNerd
+
+`REDv1.rms`
+
+[AoEZone](https://www.aoezone.net/threads/random-everything-deluxe.138317/)
 
 
 Community Games Arabia
@@ -168,3 +181,7 @@ by AlgernonR
 
 `AM@RandomSomethingExtreme v5.rms`
 
+<<<<<<< HEAD
+=======
+`Stone_Nothing.rms`
+>>>>>>> Add Random Everything Deluxe
