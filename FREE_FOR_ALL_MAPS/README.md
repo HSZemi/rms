@@ -181,7 +181,39 @@ by AlgernonR
 
 `AM@RandomSomethingExtreme v5.rms`
 
-<<<<<<< HEAD
-=======
-`Stone_Nothing.rms`
->>>>>>> Add Random Everything Deluxe
+
+King of the Mangroves
+------------------------
+by philster401 / HenkDeSuperNerd
+
+`KingOfTheMangroves_v3.rms`
+
+
+Shallow Trap
+------------------------
+by GrimGerbil
+
+`ZR@Shallow trap.rms`
+
+
+Oddworld Prison
+------------------------
+by AlgernonR
+
+`AM@OddworldPrison_v2.rms`
+
+
+Hony's Rumble
+------------------------
+by hony1717
+
+`ZR@HonysRumbleV7.rms`  
+`ZR@HonysRumbleV8WK.rms`
+
+
+Everything Nothing
+------------------------
+by SnippyInDaHouse
+
+`ZR@EverythingNothing.rms`
+

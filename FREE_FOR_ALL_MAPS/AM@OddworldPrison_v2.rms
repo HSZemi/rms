@@ -1,0 +1,206 @@
+#const SET_ATTRIBUTE 0
+#const CRACKED_EARTH 38
+#const ROCKY 40
+#const DATA_MODE_FLAGS 1
+#const GAIA_SET_PLAYER_DATA -10
+#const ATTR_SET 0
+#const AMOUNT_GOLD 3
+#const POP_HEADROOM 4
+#const MOD_RESOURCE 1
+#const DLC_LLAMA 305
+#const DLC_COW 705
+#const DLC_OSTRICH 1026
+#const DLC_GOAT 1060
+#const DLC_ORANGEBUSH 1059
+#const TREE_I 407
+
+#const MUL_ATTRIBUTE   5
+#const ADD_ATTRIBUTE   4
+#const ENABLE_OBJECT   2
+#const ATTR_CREATION_TIME 101
+#const ATTR_TRAIN_LOCATION 42
+#const ATTR_TRAIN_BUTTON 43
+#const ATTR_FOOD_COST 103
+#const ATTR_WOOD_COST 104
+#const ATTR_ENABLE 1
+#const ATTR_GOLD_COST 105
+
+
+<PLAYER_SETUP>
+random_placement
+guard_state KING AMOUNT_GOLD 0 1
+
+effect_amount MOD_RESOURCE POP_HEADROOM ATTR_SET 5
+
+effect_amount SET_ATTRIBUTE PALMTREE ATTR_DEAD_ID 348
+effect_amount SET_ATTRIBUTE BAMBOO_TREE ATTR_DEAD_ID 59
+effect_amount SET_ATTRIBUTE FORAGE ATTR_DEAD_ID 1059
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DEAD_ID 688
+
+effect_amount SET_ATTRIBUTE SHEEP ATTR_DEAD_ID 48
+effect_amount SET_ATTRIBUTE BOAR ATTR_DEAD_ID 305
+effect_amount SET_ATTRIBUTE DLC_LLAMA ATTR_DEAD_ID 705
+effect_amount SET_ATTRIBUTE DLC_COW ATTR_DEAD_ID 1056
+
+effect_amount SET_ATTRIBUTE DEER ATTR_DEAD_ID 66
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DEAD_ID 102
+
+effect_amount SET_ATTRIBUTE DLC_GOAT ATTR_DEAD_ID 66
+
+effect_amount SET_ATTRIBUTE KING ATTR_DEAD_ID 1060
+
+effect_amount SET_ATTRIBUTE TREE_I ATTR_DEAD_ID 285
+
+
+effect_amount GAIA_SET_PLAYER_DATA DATA_MODE_FLAGS ATTR_SET 3
+
+		effect_amount ADD_ATTRIBUTE DLC_GOAT ATTR_CREATION_TIME 120
+		effect_amount SET_ATTRIBUTE DLC_GOAT ATTR_TRAIN_LOCATION 826
+		effect_amount SET_ATTRIBUTE DLC_GOAT ATTR_TRAIN_BUTTON 1
+		effect_amount SET_ATTRIBUTE DLC_GOAT ATTR_FOOD_COST 150
+		effect_amount ENABLE_OBJECT DLC_GOAT ATTR_ENABLE 0	
+
+<LAND_GENERATION>
+
+base_terrain GRASS
+
+create_player_lands
+{
+  terrain_type	                DIRT
+  land_percent                  1
+  left_border                   5
+  right_border                  5
+  top_border                    5
+  bottom_border                 5
+  base_size                     3 
+  other_zone_avoidance_distance 0
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain GRASS2
+{
+base_terrain GRASS
+land_percent 100
+number_of_clumps 99
+spacing_to_other_terrain_types 0
+}
+
+create_terrain PALM_DESERT
+{
+base_terrain GRASS2
+land_percent 100
+number_of_clumps 99
+spacing_to_other_terrain_types 1
+}
+
+create_terrain DESERT
+{
+base_terrain PALM_DESERT
+land_percent 100
+number_of_clumps 99
+spacing_to_other_terrain_types 1
+}
+
+create_terrain FOREST
+{
+base_terrain DESERT
+land_percent 11
+number_of_clumps 50
+spacing_to_other_terrain_types 9
+}
+
+create_terrain CRACKED_EARTH
+{
+base_terrain DESERT
+land_percent 20
+number_of_clumps 72
+spacing_to_other_terrain_types 4
+}
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER 
+{
+  set_place_for_every_player
+  group_placement_radius        1
+  min_distance_to_players       0
+  max_distance_to_players       0
+}
+
+create_object VILLAGER
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       5
+}
+
+create_object MONK
+{
+  set_place_for_every_player
+  min_distance_to_players       3
+  max_distance_to_players       5
+}
+
+create_object MONASTERY
+{
+  set_place_for_every_player
+  min_distance_to_players       0
+  max_distance_to_players       0
+}
+
+create_object KING
+{
+  set_place_for_every_player
+  min_distance_to_players       1
+  max_distance_to_players       4
+}
+
+create_object SHEEP
+{
+  set_place_for_every_player
+  number_of_objects 1
+  set_gaia_object_only
+  min_distance_to_players       2
+  max_distance_to_players       5
+}
+
+create_object DEER
+{
+  set_place_for_every_player
+  number_of_objects 6
+  set_gaia_object_only
+  set_loose_grouping
+  min_distance_to_players       15
+  max_distance_to_players       20
+  min_distance_group_placement 6
+  number_of_groups 2
+}
+
+create_object DLC_OSTRICH
+{
+  set_place_for_every_player
+  number_of_objects 4
+  number_of_groups 2
+  set_gaia_object_only
+  set_loose_grouping
+  min_distance_to_players       15
+  max_distance_to_players       20
+  min_distance_group_placement 6
+}
+
+create_object TREE_I
+{
+  set_place_for_every_player
+  number_of_objects 1
+  number_of_groups 5
+  set_gaia_object_only
+  min_distance_to_players       4
+  max_distance_to_players       9
+  min_distance_group_placement 2
+  terrain_to_place_on DIRT
+}
+
+

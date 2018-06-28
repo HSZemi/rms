@@ -61,6 +61,12 @@ by teutonic_tanks
 
 `Stone_Nothing.rms`
 
+Stone Nothing
+-------------
+by DUXthesaviour
+
+`Stone_Nothing_v1.2_DUX.rms`
+
 Hours Of Nothing
 ----------------
 by MrMokka

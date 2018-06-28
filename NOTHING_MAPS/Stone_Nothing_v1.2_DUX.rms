@@ -1,0 +1,614 @@
+/* STONE NOTHING - THE MAP THAT ROCKS! 
+
+by DUXthesavior, 2018. Made with love for T90Official Community Games and dedicated to all nothing map lovers. Recommended settings: TG, Diplo Regicide, Koth+Regicide. Needs UP 1.5 and WK .
+
+Basic Blurb: Start with a TON of villagers + 1 Goat. Some vills, the goat, and the King might be trapped in stone. That's intended. FREE THEM! Stone piles have 10 stone each, apart from a few sprinkled around the map that have 10k. Wood costs of archers, spearmen, siege, massively reduced. Players have to mine to their opponents and allies. Stone fortifications cost increased. Unique Units wood cost NOT changed.
+
+*/
+
+
+
+#define LANDMAP
+
+#define NO_CLIFFS
+
+
+#const GOATTEE 1060
+#const DLC_FEITORIA 734
+#const DLC_HARBOR 1189
+#const MANGONEL 280
+#const ONAGER 550
+#const SIEGE_ONAGER 588
+#const STARTING_FOOD 91
+#const STARTING_WOOD 92
+#const STARTING_STONE 93
+#const STARTING_GOLD 94
+
+<PLAYER_SETUP>
+
+
+/* Players start with 420 resources. Nice. Since they are stoned. Nice. */
+
+effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET 220
+effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET 220
+effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET 220
+effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET 320
+
+if REGICIDE
+
+effect_amount MOD_RESOURCE STARTING_FOOD ATTR_SET -80
+effect_amount MOD_RESOURCE STARTING_WOOD ATTR_SET -80
+effect_amount MOD_RESOURCE STARTING_STONE ATTR_SET 270
+effect_amount MOD_RESOURCE STARTING_GOLD ATTR_SET 420
+
+endif
+
+/* KOTH+Regicide setting */
+
+if KING_OT_HILL
+guard_state KING AMOUNT_GOLD 0 1
+endif
+
+
+
+/* Changing all building costs to stone. Increasing cost of towers and castles. Some units also have their wood cost reduced (pointy bois, trade, siege) */
+
+random_placement
+
+
+
+effect_amount MUL_ATTRIBUTE HOUSE ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE HOUSE ATTR_STONE_COST 10
+effect_amount MUL_ATTRIBUTE HOUSE ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE HOUSE_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE HOUSE_F ATTR_STONE_COST 10
+effect_amount MUL_ATTRIBUTE HOUSE_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE HOUSE_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE HOUSE_C ATTR_STONE_COST 10
+effect_amount MUL_ATTRIBUTE HOUSE_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE HOUSE_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE HOUSE_I ATTR_STONE_COST 10
+effect_amount MUL_ATTRIBUTE HOUSE_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MINING_CAMP ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MINING_CAMP ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MINING_CAMP ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MINING_CAMP_F ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MINING_CAMP_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MINING_CAMP_F ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MINING_CAMP_C ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MINING_CAMP_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MINING_CAMP_C ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MINING_CAMP_I ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MINING_CAMP_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MINING_CAMP_I ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MILL ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MILL ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MILL ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MILL_F ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MILL_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MILL_F ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MILL_C ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MILL_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MILL_C ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE MILL_I ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE MILL_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MILL_I ATTR_STONE_COST 10
+
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE LUMBER_CAMP ATTR_STONE_COST 10000
+
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_F ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_F ATTR_STONE_COST 10000
+
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_C ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_C ATTR_STONE_COST 10000
+
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_I ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE LUMBER_CAMP_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE LUMBER_CAMP_I ATTR_STONE_COST 10000
+
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE ARCHERY_RANGE ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE ARCHERY_RANGE_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE ARCHERY_RANGE_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE ARCHERY_RANGE_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE ARCHERY_RANGE_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BARRACKS ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BARRACKS ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BARRACKS ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BARRACKS_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BARRACKS_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BARRACKS_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BARRACKS_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BARRACKS_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BARRACKS_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BARRACKS_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BARRACKS_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BARRACKS_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE STABLE ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE STABLE ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE STABLE ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE STABLE_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE STABLE_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE STABLE_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE STABLE_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE STABLE_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE STABLE_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE STABLE_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE STABLE_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE STABLE_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BLACKSMITH ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BLACKSMITH ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BLACKSMITH ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BLACKSMITH_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BLACKSMITH_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BLACKSMITH_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BLACKSMITH_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BLACKSMITH_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BLACKSMITH_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE BLACKSMITH_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BLACKSMITH_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE BLACKSMITH_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE DOCK ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DOCK ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE DOCK ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE DOCK_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DOCK_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE DOCK_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE DOCK_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DOCK_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE DOCK_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE DOCK_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DOCK_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE DOCK_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE DLC_HARBOR ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DLC_HARBOR ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE DLC_HARBOR ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE FARM ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE FARM ATTR_STONE_COST 7
+effect_amount MUL_ATTRIBUTE FARM ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE FISH_TRAP ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE FISH_TRAP ATTR_STONE_COST 7
+effect_amount MUL_ATTRIBUTE FISH_TRAP ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MARKET ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MARKET ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MARKET ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MARKET_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MARKET_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MARKET_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MARKET_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MARKET_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MARKET_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MARKET_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MARKET_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MARKET_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MONASTERY ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MONASTERY ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MONASTERY ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MONASTERY_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MONASTERY_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MONASTERY_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MONASTERY_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MONASTERY_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MONASTERY_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE MONASTERY_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE MONASTERY_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE MONASTERY_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE UNIVERSITY ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE UNIVERSITY ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE UNIVERSITY ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE UNIVERSITY_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE UNIVERSITY_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE UNIVERSITY_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE UNIVERSITY_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE UNIVERSITY_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE UNIVERSITY_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE UNIVERSITY_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE UNIVERSITY_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE UNIVERSITY_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_WORKSHOP ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_F ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_WORKSHOP_F ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_F ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_C ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_WORKSHOP_C ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_C ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_I ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_WORKSHOP_I ATTR_STONE_COST 20
+effect_amount MUL_ATTRIBUTE SIEGE_WORKSHOP_I ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE OUTPOST ATTR_WOOD_COST -2
+
+effect_amount MUL_ATTRIBUTE WATCH_TOWER ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE WATCH_TOWER ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE WATCH_TOWER ATTR_STONE_COST 3000
+
+effect_amount MUL_ATTRIBUTE GUARD_TOWER ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE GUARD_TOWER ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE GUARD_TOWER ATTR_STONE_COST 3000
+
+effect_amount MUL_ATTRIBUTE KEEP ATTR_WOOD_COST -2
+effect_amount MUL_ATTRIBUTE KEEP ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE KEEP ATTR_STONE_COST 3000
+
+effect_amount MUL_ATTRIBUTE BOMBARD_TOWER ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE BOMBARD_TOWER ATTR_STONE_COST 5000
+
+effect_amount MUL_ATTRIBUTE CASTLE ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE CASTLE ATTR_STONE_COST 6900
+
+effect_amount MUL_ATTRIBUTE DLC_FEITORIA ATTR_STONE_COST -1
+effect_amount SET_ATTRIBUTE DLC_FEITORIA ATTR_STONE_COST 5000
+effect_amount MUL_ATTRIBUTE DLC_FEITORIA ATTR_GOLD_COST -1
+effect_amount SET_ATTRIBUTE DLC_FEITORIA ATTR_GOLD_COST 5000
+
+effect_amount MUL_ATTRIBUTE STONE_WALL ATTR_STONE_COST-1
+effect_amount SET_ATTRIBUTE STONE_WALL ATTR_STONE_COST 30
+
+effect_amount MUL_ATTRIBUTE FORTIFIED_WALL ATTR_STONE_COST-1
+effect_amount SET_ATTRIBUTE FORTIFIED_WALL ATTR_STONE_COST 30
+
+effect_amount MUL_ATTRIBUTE TRADE_CART ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE TRADE_CART ATTR_WOOD_COST 50
+
+effect_amount MUL_ATTRIBUTE PIKEMAN ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE PIKEMAN ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE SPEARMAN ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SPEARMAN ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE HALBERDIER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE HALBERDIER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE ARCHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE ARCHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE CROSSBOWMAN ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE CROSSBOWMAN ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE ARBALEST ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE ARBALEST ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE CAVALRY_ARCHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE CAVALRY_ARCHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE HEAVY_CAVALRY_ARCHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE HEAVY_CAVALRY_ARCHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE SKIRMISHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SKIRMISHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE ELITE_SKIRMISHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE ELITE_SKIRMISHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE IMPERIAL_SKIRMISHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE IMPERIAL_SKIRMISHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE ARCHER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE ARCHER ATTR_WOOD_COST 1
+
+effect_amount MUL_ATTRIBUTE BATTERING_RAM ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE BATTERING_RAM ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE CAPPED_RAM ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE CAPPED_RAM ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE SIEGE_RAM ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_RAM ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE MANGONEL ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE MANGONEL ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE ONAGER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE ONAGER ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE SIEGE_ONAGER ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SIEGE_ONAGER ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE BOMBARD_CANNON ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE BOMBARD_CANNON ATTR_WOOD_COST 20
+
+effect_amount MUL_ATTRIBUTE HEAVY_SCORPION ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE HEAVY_SCORPION ATTR_WOOD_COST 10
+
+effect_amount MUL_ATTRIBUTE SCORPION ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE SCORPION ATTR_WOOD_COST 10
+
+effect_amount MUL_ATTRIBUTE TREBUCHET_PACKED ATTR_WOOD_COST -1
+effect_amount SET_ATTRIBUTE TREBUCHET_PACKED ATTR_WOOD_COST 30
+
+<LAND_GENERATION>
+
+
+
+
+base_terrain DIRT
+
+/* Players start about halfway between the edge of the map and the middle. Cozy. */
+
+create_player_lands
+
+{
+
+terrain_type DIRT
+
+left_border 10
+right_border 10
+top_border 10
+bottom_border 10 
+set_zone_by_team
+  base_size 1 
+  
+other_zone_avoidance_distance 5
+}
+
+
+
+
+
+
+<OBJECTS_GENERATION>
+
+
+
+/* Players start with 150 vills. Shock at the start, faster "boring" dark age, and to reward fast vill micro. */
+
+
+create_object VILLAGER
+
+{
+
+number_of_objects 150 
+set_place_for_every_player
+  
+min_distance_to_players 3  
+max_distance_to_players 10
+}
+
+/* Trade carts at the ready. To take up valuable space and to use later if TG - or to trade with opponent if ballsy. */
+
+create_object TRADE_CART
+
+{
+number_of_objects 10
+set_place_for_every_player
+
+min_distance_to_players 7
+max_distance_to_players 9
+
+} 
+
+/* Kings for Regicide and KotH */
+
+
+
+if REGICIDE 
+
+create_object KING
+
+{
+
+set_place_for_every_player
+
+min_distance_to_players 15
+max_distance_to_players 20
+}
+
+
+endif
+
+
+
+if KING_OT_HILL
+create_object KING
+
+{
+
+set_place_for_every_player
+
+min_distance_to_players 15
+max_distance_to_players 20
+}
+
+
+endif
+
+
+
+/* Players don't need TCs to start the game. They get a Dome of the Rock instead, because the map ROCKS. They can delete their DotR or build on the side of stone */
+
+/*
+create_object TOWN_CENTER 
+{
+set_place_for_every_player
+
+group_placement_radius 1
+
+min_distance_to_players 0
+
+max_distance_to_players 0
+
+}
+*/
+
+create_object DOME_OF_THE_ROCK
+{
+set_place_for_every_player
+
+group_placement_radius 1
+min_distance_to_players 0
+
+max_distance_to_players 0
+
+}
+
+/* Creating "super-heavy" stone piles so that players dont' run out of resources fast. Point of contention later on once the map thins out. */
+
+if TINY_MAP
+create_object STONE
+{
+number_of_groups 10
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+if SMALL_MAP
+create_object STONE
+{
+number_of_groups 15
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+if MEDIUM_MAP
+create_object STONE
+{
+number_of_groups 20
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+if LARGE_MAP
+create_object STONE
+{
+number_of_groups 30
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+if HUGE_MAP
+create_object STONE
+{
+number_of_groups 40
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+if GIGANTIC_MAP
+create_object STONE
+{
+number_of_groups 50
+number_of_objects 2
+resource_delta 9650
+min_distance_to_players 10
+min_distance_group_placement 0
+}
+endif
+
+/* Filling the rest of the map with very small stone piles. Players have to mine through them to reach their friends, opponents, and center of the map. */
+
+create_object STONE
+{
+number_of_groups 10000
+number_of_objects 10000
+resource_delta -340
+min_distance_to_players 0
+min_distance_group_placement 0
+}
+
+/* Initially meant to give players a market, but they should really clear out space by themselves. Leaving code in just because. It was supposed to spawn on the TC, when there was one. */
+
+/* create_object MARKET
+{
+  set_place_for_every_player
+  group_placement_radius     1
+  min_distance_to_players    0
+  max_distance_to_players    0
+}
+*/
+
+/* Goats love rocky terrain. Supergoat to start the game with. */
+ create_object GOATTEE
+{
+	number_of_objects 1
+	resource_delta	900
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 9
+} 
+
+/* GET THE T90POINTYBOIS IN THE CHAT !!!!11!!!!! */
+
+create_object HALBERDIER
+{
+	number_of_objects 1
+	set_place_for_every_player
+	min_distance_to_players 5
+	max_distance_to_players 9
+}

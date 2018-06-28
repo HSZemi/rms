@@ -1,0 +1,1480 @@
+/*--------------------------------------*/
+/* King Deer_v2_turbo					*/
+/* JUN 14 2018							*/
+/* require userpatch 1.5				*/
+/* created by xthomas					*/
+/*--------------------------------------*/
+/* extra deer rush 						*/
+/*--------------------------------------*/
+/* Start Script							*/
+/*--------------------------------------*/
+<PLAYER_SETUP>
+direct_placement
+
+#const AT_TEAM 2
+#const SET_ATTRIBUTE   0    /* Type: Attribute Const */
+#const ATTR_HITPOINTS 0
+
+effect_amount SET_ATTRIBUTE DIRE_WOLF ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE MACAW ATTR_HITPOINTS 0
+
+#const GAIA_SET_ATTRIBUTE -1
+#const DEER_CLASS 909
+#const ATTR_TERRAIN_ID 53
+
+effect_amount GAIA_SET_ATTRIBUTE DEER_CLASS ATTR_TERRAIN_ID 0
+
+#const ATTR_DEAD_ID 57
+#const EXPLOSION_SPAWNER 707
+
+effect_amount SET_ATTRIBUTE DIRE_WOLF ATTR_DEAD_ID 65
+
+effect_amount SET_ATTRIBUTE EXPLOSION_SPAWNER ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE EXPLOSION_SPAWNER ATTR_DEAD_ID 816
+
+
+/*--------------------------------------*/
+/* Define Lands							*/
+/*--------------------------------------*/
+if 1_PLAYER_GAME
+	start_random
+		percent_chance 50
+			#define LAND1
+		percent_chance 50
+			#define LAND2
+	end_random
+elseif 2_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+elseif 3_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	start_random
+		percent_chance 50
+			#define LAND3
+		percent_chance 50
+			#define LAND4
+	end_random
+elseif 4_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	#define LAND3
+	#define LAND4
+elseif 5_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	#define LAND3
+	#define LAND4
+	start_random
+		percent_chance 50
+			#define LAND5
+		percent_chance 50
+			#define LAND6
+	end_random
+elseif 6_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	#define LAND3
+	#define LAND4
+	#define LAND5
+	#define LAND6
+elseif 7_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	#define LAND3
+	#define LAND4
+	#define LAND5
+	#define LAND6
+	start_random
+		percent_chance 50
+			#define LAND7
+		percent_chance 50
+			#define LAND8
+	end_random
+elseif 8_PLAYER_GAME
+	#define LAND1
+	#define LAND2
+	#define LAND3
+	#define LAND4
+	#define LAND5
+	#define LAND6
+	#define LAND7
+	#define LAND8
+endif
+
+/*--------------------------------------*/
+/* roll map terrain						*/
+/*--------------------------------------*/
+start_random	
+	percent_chance 1
+
+
+		#define SNOW_MAP
+		#define ICE_MAP
+
+	percent_chance 9
+
+
+		#define SNOW_MAP
+
+	percent_chance 50
+
+
+		#define JUNGLE_MAP
+
+	percent_chance 40
+
+
+		#define FOREST_MAP
+
+
+end_random
+
+/*--------------------------------------*/
+/* reserved:							*/
+/* WATER|SHALLOW|DESERT|DIRT|DIRT[2-3]	*/
+/*--------------------------------------*/
+
+
+/*--------------------------------------*/
+/* Define Terrain						*/
+/*--------------------------------------*/
+/* 
+ * important! reserve 
+ * DIRT DIRT2 DIRT3 DESERT SHALLOW for Deer Lands
+ * make sure DEER_FOREST_TERRAIN is 
+ *   different from FOREST_TERRAIN...
+ */
+
+if ICE_MAP
+	#const PLAYER_TERRAIN_TYPE 32 /*--SNOW--*/
+	#const FOREST_TERRAIN 21 /*--SNOW_FOREST--*/
+	#const FOREST_BASE_TERRAIN 34 /*--GRASS_SNOW--*/
+	#const DEER_FOREST_TERRAIN 19 /*--PINE_FOREST--*/
+	#const TREEA 413 /*--SNOWPINETREE--*/
+	#const TREEB 413
+	#const TREEC 413
+	#const TREED 350 /*--PINETREE--*/
+elseif SNOW_MAP
+	#const PLAYER_TERRAIN_TYPE 32 /*--SNOW--*/
+	#const FOREST_TERRAIN 21 /*--SNOW_FOREST--*/
+	#const FOREST_BASE_TERRAIN 34 /*--GRASS_SNOW--*/
+	#const DEER_FOREST_TERRAIN 19 /*--PINE_FOREST--*/
+	#const TREEA 413 /*--SNOWPINETREE--*/
+	#const TREEB 413
+	#const TREEC 413
+	#const TREED 350 /*--PINETREE--*/
+elseif JUNGLE_MAP
+	#const PLAYER_TERRAIN_TYPE 12 /*--GRASS2--*/
+	#const FOREST_TERRAIN 17 /*--JUNGLE--*/
+	#const FOREST_BASE_TERRAIN 5 /*--LEAVES--*/
+	#const DEER_FOREST_TERRAIN 19 /*--PINE_FOREST--*/
+	#const TREEA 414 /*--JUNGLETREE--*/
+	#const TREEB 414
+	#const TREEC 414
+	#const TREED 414
+elseif FOREST_MAP
+	#const PLAYER_TERRAIN_TYPE 0 /*--GRASS--*/
+	#const FOREST_TERRAIN 10 /*--FOREST--*/
+	#const FOREST_BASE_TERRAIN 5 /*--LEAVES--*/
+	#const DEER_FOREST_TERRAIN 19 /*--PINE_FOREST--*/
+	#const TREEA 414 /*--JUNGLETREE--*/
+	#const TREEB 414
+	#const TREEC 414
+	#const TREED 414
+endif
+
+#const FARM_PLOUGHED 29
+#const FARM_GROWING 30
+#const FARM_GROWING_MORE 31
+#const FARM_PLANTED 7
+#const FARM_EXPIRED 8
+
+<LAND_GENERATION>
+
+base_terrain SHALLOW
+
+create_land
+{
+	terrain_type PLAYER_TERRAIN_TYPE
+	land_position 56 56
+	zone 1
+	other_zone_avoidance_distance 10
+	left_border 44
+	top_border 44
+}
+
+create_land
+{
+	terrain_type PLAYER_TERRAIN_TYPE
+	land_position 13 13
+	base_size 1
+	number_of_tiles 100
+	bottom_border 85
+	right_border 85
+	zone 1
+}
+
+create_land
+{
+    terrain_type WATER
+    land_position 99 13
+    land_id 15
+    other_zone_avoidance_distance 3
+    zone 15
+    base_size 2
+    number_of_tiles 0
+}
+create_land
+{
+    terrain_type WATER
+    land_percent 1
+    land_position 13 99
+    land_id 15
+    other_zone_avoidance_distance 3
+    zone 15
+    base_size 2
+    number_of_tiles 0
+}
+
+
+/*--------------------------------------*/
+/* Players								*/
+/*--------------------------------------*/
+if 2_TEAM_GAME
+	start_random
+		percent_chance 50
+			#define TEAM_ONE_TWO
+		percent_chance 50
+			#define TEAM_TWO_ONE
+	end_random
+endif
+
+if LAND1
+	create_land
+	{
+		if 2_PLAYER_GAME
+			land_position rnd(38,76) rnd(12,14)
+		elseif 4_PLAYER_GAME
+			land_position rnd(38,52) rnd(12,14)
+		else
+	    	land_position rnd(38,40) rnd(12,14)
+		endif
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 1 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 2 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND2
+	create_land
+	{
+		if 2_PLAYER_GAME
+			land_position rnd(12,14) rnd(38,72)
+		elseif 4_PLAYER_GAME
+			land_position rnd(12,14) rnd(38,54)
+		else
+			land_position rnd(12,14) rnd(38,40)
+		endif
+	    terrain_type DEEP_WATER
+	    zone 1
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 2 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 1 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND3
+	create_land
+	{
+		if 4_PLAYER_GAME
+			land_position rnd(63,76) rnd(12,14)
+		else
+			land_position rnd(51,52) rnd(12,14)
+		endif
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 1 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 2 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND4
+	create_land
+	{
+		if 4_PLAYER_GAME
+			land_position rnd(12,14) rnd(63,76)
+		else
+			land_position rnd(12,14) rnd(51,52)
+		endif
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 2 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 1 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND5
+	create_land
+	{
+		land_position rnd(63,64) rnd(12,14)
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 1 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 2 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND6
+	create_land
+	{
+		land_position rnd(12,14) rnd(63,64)
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 2 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 1 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND7
+	create_land
+	{
+		land_position rnd(75,76) rnd(12,14)
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 1 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 2 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+if LAND8
+	create_land
+	{
+		land_position rnd(12,14) rnd(75,76)
+	    terrain_type DEEP_WATER
+	    other_zone_avoidance_distance 10
+	    zone 1
+	    if TEAM_ONE_TWO
+	    	assign_to AT_TEAM 2 0 0
+	    elseif TEAM_TWO_ONE
+	    	assign_to AT_TEAM 1 0 0
+	    else
+			assign_to AT_TEAM -10 0 0
+		endif
+		base_size	9
+	}
+endif
+
+
+<CLIFF_GENERATION>
+if TINY_MAP
+min_number_of_cliffs 20
+max_number_of_cliffs 20 
+elseif SMALL_MAP
+min_number_of_cliffs 25
+max_number_of_cliffs 25 
+elseif MEDIUM_MAP
+min_number_of_cliffs 30
+max_number_of_cliffs 30  
+elseif LARGE_MAP
+min_number_of_cliffs 35
+max_number_of_cliffs 35  
+elseif HUGE_MAP
+min_number_of_cliffs 40
+max_number_of_cliffs 40  
+elseif GIGANTIC_MAP
+min_number_of_cliffs 50
+max_number_of_cliffs 50  
+endif
+<TERRAIN_GENERATION>
+/*--------------------------------------*/
+/* Deer Islands							*/
+/*--------------------------------------*/
+create_terrain FARM_EXPIRED
+{
+	base_terrain WATER
+	number_of_clumps 99
+	land_percent 99
+}
+
+
+/*--------------------------------------*/
+/* Water Patches						*/
+/*--------------------------------------*/
+create_terrain MED_WATER
+{
+	base_terrain SHALLOW
+	number_of_clumps 45
+	land_percent 100
+}
+
+create_terrain WATER
+{
+	base_terrain MED_WATER
+	number_of_clumps 30
+	land_percent 1
+	spacing_to_other_terrain_types 2
+}
+
+if ICE_MAP
+create_terrain ICE
+{
+	base_terrain SHALLOW
+	number_of_clumps 10
+	land_percent 20
+}
+endif
+
+/*--------------------------------------*/
+/* Main Terrain							*/
+/*--------------------------------------*/
+create_terrain PLAYER_TERRAIN_TYPE
+{
+	base_terrain DEEP_WATER
+	land_percent 99
+	number_of_clumps 99
+}
+
+/*--------------------------------------*/
+/* Main Forest							*/
+/*--------------------------------------*/
+create_terrain FOREST_BASE_TERRAIN
+{
+	base_terrain PLAYER_TERRAIN_TYPE
+	land_percent 99
+	number_of_clumps 99
+	set_avoid_player_start_areas
+}
+create_terrain FOREST_TERRAIN
+{
+	base_terrain FOREST_BASE_TERRAIN
+	spacing_to_other_terrain_types 7
+	land_percent 99
+	number_of_clumps 99
+	set_avoid_player_start_areas
+}
+
+/*--------------------------------------*/
+/* Main Terrain							*/
+/*--------------------------------------*/
+create_terrain PLAYER_TERRAIN_TYPE
+{
+	base_terrain FOREST_BASE_TERRAIN
+	number_of_clumps 99
+	land_percent 99
+}
+
+
+
+
+<OBJECTS_GENERATION>
+
+
+
+
+
+
+
+/* Every time a dire wolf decays a deer comes out */
+/* MAXIMUM 99 create object commands, any more and it will crash */
+/* Green Arabia (our standard for this) has 27 Object commands */
+/* So we can have 72 DIRE_WOLF's */
+
+/* EXPLOSION SPAWNER is used to spawn EXPLOSIONS! */
+/* DIRE _WOLF is used to spawn DEER! */
+
+/* cover the deer terrain */
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	number_of_objects 99
+	group_placement_radius 5
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 10000
+}
+
+/* WAVE ONE */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 99
+	min_distance_to_players 8
+	max_distance_to_players 8
+	group_placement_radius 19
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 25
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 50
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 75
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 100
+}
+
+/* WAVE TWO */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 200
+}
+
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 200
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 225
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 250
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 275
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 300
+}
+
+/* WAVE THREE */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 400
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 400
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 425
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 450
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 475
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 500
+}
+
+/* WAVE FOUR */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 600
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 600
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 625
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 650
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 675
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 700
+}
+
+
+/* WAVE FIVE */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 800
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 800
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 825
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 850
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 875
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 900
+}
+
+/* WAVE SIX */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 1000
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1000
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1025
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1050
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1075
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1100
+}
+
+/* WAVE SEVEN */
+create_object EXPLOSION_SPAWNER
+{
+	set_place_for_every_player
+	set_gaia_object_only
+	number_of_objects 1
+	min_distance_to_players 0
+	max_distance_to_players 0
+	resource_delta 1200
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1200
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 4
+	elseif HUGE_MAP
+		number_of_objects 4
+	elseif LARGE_MAP
+		number_of_objects 3
+	elseif MEDIUM_MAP
+		number_of_objects 2
+	else
+		number_of_objects 1
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1225
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 8
+	elseif HUGE_MAP
+		number_of_objects 8
+	elseif LARGE_MAP
+		number_of_objects 6
+	elseif MEDIUM_MAP
+		number_of_objects 4
+	else
+		number_of_objects 2
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1250
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 12
+	elseif HUGE_MAP
+		number_of_objects 12
+	elseif LARGE_MAP
+		number_of_objects 9
+	elseif MEDIUM_MAP
+		number_of_objects 6
+	else
+		number_of_objects 3
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1275
+}
+create_object DIRE_WOLF
+{
+	number_of_groups 2
+	if GIGANTIC_MAP
+		number_of_objects 16
+	elseif HUGE_MAP
+		number_of_objects 16
+	elseif LARGE_MAP
+		number_of_objects 12
+	elseif MEDIUM_MAP
+		number_of_objects 8
+	else
+		number_of_objects 4
+	endif
+	temp_min_distance_group_placement 20
+	terrain_to_place_on FARM_EXPIRED
+	resource_delta 1300
+}
+
+/*--------------------------------------*/
+/* Player Objects						*/
+/*--------------------------------------*/
+create_object TOWN_CENTER
+{
+    set_place_for_every_player
+    min_distance_to_players 0
+    max_distance_to_players 0
+}
+
+
+create_object VILLAGER
+{
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+}
+create_object SCOUT
+{
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+}
+/* SPECIAL STUFF FOR REGICIDE */
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players			6
+	max_distance_to_players			6
+}
+endif
+
+create_object RELIC
+{
+	number_of_objects				5
+	min_distance_to_players			25
+	temp_min_distance_group_placement 20
+}
+
+/* BAA BAA */
+create_object SHEEP
+{
+	number_of_objects				4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			8
+	max_distance_to_players			10
+}
+
+create_object SHEEP
+{
+	number_of_groups				2
+	number_of_objects				2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			20
+}
+
+create_object BOAR
+{
+	number_of_groups				2
+	number_of_objects				1
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			20
+}
+
+/* BIG STONE */
+create_object STONE
+{
+	number_of_objects				5
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			14
+	max_distance_to_players			18
+	min_distance_group_placement	7
+}
+
+/* BIG GOLD */
+create_object GOLD
+{
+	number_of_objects				7
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			12
+	max_distance_to_players			16
+	min_distance_group_placement	7
+}
+
+/* STONE */
+create_object STONE
+{
+	number_of_objects				4
+	group_placement_radius			2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			20
+	max_distance_to_players			26
+	min_distance_group_placement	14
+}
+
+/* GOLD */
+create_object GOLD
+{
+	number_of_objects				4
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			18
+	max_distance_to_players			26
+	min_distance_group_placement	7
+}
+
+create_object GOLD
+{
+	number_of_objects				4
+	group_placement_radius			3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players			25
+	max_distance_to_players			35
+	min_distance_group_placement	7
+}
+
+/*--------------------------------------*/
+/* Trees								*/
+/*--------------------------------------*/
+create_object TREEA
+{
+	number_of_objects             2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players       4
+	max_distance_to_players       5
+	min_distance_group_placement  2
+}
+create_object TREEB
+{
+	number_of_objects             3
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_to_players       6
+	max_distance_to_players       8
+	min_distance_group_placement  2
+}
+create_object TREEC
+{
+	number_of_objects             49
+	min_distance_group_placement  6
+	set_scaling_to_map_size
+	min_distance_to_players 10
+}
+
+/* WOLVES */
+create_object WOLF
+{
+	number_of_groups				3
+	number_of_objects				1
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement	12
+	min_distance_to_players			40
+	max_distance_to_players			120
+}
+
+create_object WOLF
+{
+	number_of_objects				2
+	set_gaia_object_only
+	set_place_for_every_player
+	min_distance_group_placement	12
+	min_distance_to_players			30
+	max_distance_to_players			40
+}
+
+/* BIRDIES */
+create_object HAWK
+{
+	number_of_objects				6
+	set_scaling_to_map_size
+}
+
+/*--------------------------------------*/
+/* Birds								*/
+/*--------------------------------------*/
+create_object HAWK
+{
+   number_of_objects         6
+   set_scaling_to_map_size
+}
+
+<CONNECTION_GENERATION>
+
+create_connect_all_lands
+{
+	replace_terrain FOREST_TERRAIN PLAYER_TERRAIN_TYPE
+	replace_terrain FOREST_BASE_TERRAIN PLAYER_TERRAIN_TYPE
+	terrain_cost FOREST_TERRAIN 1
+	terrain_cost FOREST_BASE_TERRAIN 4
+	terrain_size FOREST_TERRAIN 5 1
+	terrain_size FOREST_BASE_TERRAIN 5 1
+}
+
+<ELEVATION_GENERATION>
+
+create_elevation 3
+{
+	base_terrain DEEP_WATER /*--player--*/
+	number_of_tiles 1000
+	number_of_clumps 10  /* about 100 tiles per hill */
+	set_scale_by_size  /* both total size and number of hills scale with map */
+	set_scale_by_groups  /* so bigger maps have more hills, of same size */
+}
