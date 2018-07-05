@@ -23,6 +23,7 @@ Random Everything Deluxe
 -------------------------
 by HenkDeSuperNerd
 
+`REDv2.rms`  
 `REDv1.rms`
 
 [AoEZone](https://www.aoezone.net/threads/random-everything-deluxe.138317/)
